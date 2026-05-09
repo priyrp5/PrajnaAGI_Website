@@ -4,135 +4,36 @@
 <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>हमारे बारे में — PrajnaAGI</title>
-<!-- Open Graph / WhatsApp -->
-<meta property="og:title" content="हमारे बारे में — PrajnaAGI">
-<meta property="og:description" content="विज्ञान, अंतरिक्ष और तकनीक की ताज़ा खोजों का विश्वसनीय स्रोत (PrajnaAGI)">
-<meta property="og:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000">
-<meta property="og:type" content="website">
-
-<!-- X / Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="हमारे बारे में — PrajnaAGI">
-<meta name="twitter:description" content="विज्ञान, अंतरिक्ष और तकनीक की ताज़ा खोजों का विश्वसनीय स्रोत (PrajnaAGI)">
-<meta name="twitter:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000">
-<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+<title>पर्यावरण — PrajnaAGI</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Devanagari:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
-  :root { 
-    --accent: #F4C430; 
-    --accent-glow: rgba(244, 196, 48, 0.6);
-    --bg: #000; 
-  }
-  
-  body { 
-    margin: 0; padding: 0; 
-    background: var(--bg); 
-    color: #fff; 
-    font-family: 'Noto Sans Devanagari', sans-serif; 
-  }
+  /* Base CSS & Theme */
+  :root { --transition-theme: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.3s ease; }
+  [data-theme="dark"] { --bg:#080808; --surface:#1a1a1a; --border:rgba(255,255,255,0.08); --text:#f0f0f0; --muted:#999; --accent:#F4C430; --accent-bg:rgba(244, 196, 48, 0.1); --accent-glow:rgba(244, 196, 48, 0.4); --btn-text:#080808;}
+  [data-theme="light"] { --bg:#f7f6f2; --surface:#ffffff; --border:rgba(0,0,0,0.08); --text:#111111; --muted:#555; --accent:#D4AA00; --accent-bg:rgba(212, 170, 0, 0.1); --accent-glow:rgba(212, 170, 0, 0.4); --btn-text:#ffffff;}
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Noto Sans Devanagari',sans-serif; margin: 0; transition:var(--transition-theme);}
 
-  #spaceCanvas { 
-    position: fixed; top: 0; left: 0; 
-    width: 100vw; height: 100vh; 
-    z-index: -1; 
-  }
+  /* Environment Hero */
+  .env-hero { height: 60vh; background: url('https://images.unsplash.com/photo-1614726365723-4df9cb773531?auto=format&fit=crop&q=80&w=1920') no-repeat center 30%/cover; position: relative; display: flex; align-items: flex-end; padding: 4rem 4%; }
+  .env-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--bg) 0%, transparent 80%); }
+  .hero-content { position: relative; z-index: 10; animation: fadeUp 1s ease; }
+  .hero-content h1 { font-family: 'Tiro Devanagari Hindi', serif; font-size: 4rem; margin: 0 0 10px 0; color: #fff; text-shadow: 0 4px 15px rgba(0,0,0,0.8);}
 
-  .about-section {
-    position: relative;
-    z-index: 10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    pointer-events: none;
-  }
+  /* Articles Grid */
+  .article-container { max-width: 1320px; margin: 4rem auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+  .article-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; display: flex; flex-direction: column;}
+  .article-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 30px var(--accent-glow); }
+  .card-img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.5s;}
+  .article-card:hover .card-img { transform: scale(1.05); }
+  .card-img-wrap { overflow: hidden; position: relative; }
+  .card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column;}
+  .card-badge { align-self: flex-start; background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;}
+  .card-body h3 { margin: 0 0 10px 0; font-size: 1.3rem; line-height: 1.4; color: var(--text); font-family: 'Tiro Devanagari Hindi', serif;}
+  .card-body p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; flex: 1;}
+  .read-more { color: var(--accent); font-size: 0.85rem; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;}
 
-  .distort-target { 
-    transition: transform 0.1s ease-out, box-shadow 0.4s ease, color 0.4s ease; 
-    pointer-events: auto;
-    will-change: transform, filter;
-  }
-
-  /* 350px Profile Image with Glow[cite: 3] */
-  .profile-image {
-    width: 350px; height: 350px;
-    border-radius: 25px;
-    border: 2px solid var(--accent);
-    object-fit: cover;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 0 20px rgba(0,0,0,0.8);
-  }
-  
-  .profile-image:hover {
-    box-shadow: 0 0 60px var(--accent-glow);
-    transform: scale(1.02) !important;
-  }
-
-  /* Bold Devanagari Name with Glow[cite: 3] */
-  .name { 
-    font-family: 'Tiro Devanagari Hindi', serif; 
-    font-size: 3.8rem; font-weight: 700; 
-    margin: 0; color: #fff;
-  }
-  
-  .name:hover {
-    color: var(--accent);
-    text-shadow: 0 0 30px var(--accent-glow);
-  }
-
-  .designation { 
-    color: var(--accent); 
-    font-size: 1.5rem; font-weight: 700; 
-    letter-spacing: 3px; margin-bottom: 2rem;
-    text-transform: uppercase;
-  }
-
-  /* Corrected AI Badge & Icon Alignment[cite: 3] */
-  .ai-badge {
-    display: inline-flex; align-items: center; gap: 1.2rem;
-    padding: 1rem 2.5rem; border: 2px solid #fff; border-radius: 50px;
-    background: rgba(0,0,0,0.6); color: #fff; font-weight: 600;
-    backdrop-filter: blur(10px);
-    position: relative;
-  }
-  
-  .ai-badge:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    box-shadow: 0 0 30px var(--accent-glow);
-  }
-
-  .icon-wrapper { 
-    position: relative; 
-    width: 24px; height: 24px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .main-icon { width: 24px; height: 24px; z-index: 5; position: relative; }
-
-  /* Center-Aligned 8-Particle Explosion[cite: 3] */
-  .palette { 
-    position: absolute; top: 50%; left: 50%;
-    width: 6px; height: 6px; 
-    background: var(--accent); border-radius: 50%; 
-    opacity: 0; transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); 
-    margin-top: -3px; margin-left: -3px;
-  }
-
-  .ai-badge:hover .palette { opacity: 1; }
-  .ai-badge:hover .p1 { transform: translate(-35px, -35px); }
-  .ai-badge:hover .p2 { transform: translate(35px, -35px); }
-  .ai-badge:hover .p3 { transform: translate(-35px, 35px); }
-  .ai-badge:hover .p4 { transform: translate(35px, 35px); }
-  .ai-badge:hover .p5 { transform: translate(0, -45px); }
-  .ai-badge:hover .p6 { transform: translate(0, 45px); }
-  .ai-badge:hover .p7 { transform: translate(-45px, 0); }
-  .ai-badge:hover .p8 { transform: translate(45px, 0); }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 </style>
 <style>
 /* ── GLOBAL NAV & FOOTER VARS ── */
@@ -293,59 +194,11 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
     .logo { font-size:1.4rem !important; }
     #headerBlackHole { width:40px; height:40px; }
 }
-
-/* ── MISSION & VISION ── */
-.mission-vision-section {
-    position: relative;
-    z-index: 10;
-    padding: 6rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-.content-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-.glass-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 2.5rem;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: var(--transition);
-    text-align: center;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-}
-.glass-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent);
-    box-shadow: 0 10px 30px var(--accent-glow);
-}
-.glass-card .icon {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-}
-.glass-card h2 {
-    font-family: 'Tiro Devanagari Hindi', serif;
-    color: var(--accent);
-    margin-bottom: 1rem;
-    font-size: 1.8rem;
-    margin-top: 0;
-}
-.glass-card p {
-    color: var(--text-main);
-    line-height: 1.8;
-    font-size: 1.05rem;
-    margin: 0;
-}
 </style>
 </head>
 <body data-theme="dark">
-<canvas id="spaceCanvas"></canvas>
 
-<!-- ═══ NAVIGATION ═══ -->
+<!-- ── NAVIGATION ── -->
 <nav>
     <div class="nav-inner">
         <div class="brand-container">
@@ -355,7 +208,7 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
                 <li><a href="space.html">🌌 अंतरिक्ष</a></li>
                 <li><a href="science.html">🔬 विज्ञान</a></li>
                 <li><a href="tech.html">💻 तकनीक</a></li>
-                <li><a href="environment.html">🌿 पर्यावरण</a></li>
+                <li><a href="environment.html" class="active">🌿 पर्यावरण</a></li>
                 <li><a href="health.html">❤️ स्वास्थ्य</a></li>
                 <li><a href="about.html">🙏 हमारे बारे में</a></li>
             </ul>
@@ -370,7 +223,7 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
     </div>
 </nav>
 
-<!-- ═══ MOBILE DROPDOWN ═══ -->
+<!-- ── MOBILE DROPDOWN ── -->
 <div class="mobile-menu" id="mobileMenu">
     <ul>
         <li><a href="space.html">🌌 अंतरिक्ष</a></li>
@@ -383,153 +236,55 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
     </ul>
 </div>
 
-<!-- ═══ ABOUT CONTENT ═══ -->
-<section class="about-section">
-  <img src="about101.jpeg" class="profile-image distort-target" alt="प्रिय रंजन पाण्डेय">
-  <h1 class="name distort-target">प्रिय रंजन पाण्डेय</h1>
-  <div class="designation distort-target">स्वामित्व एवं निर्माता</div>
-  <div class="ai-badge distort-target">
-    <div class="icon-wrapper">
-      <svg class="main-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-      <div class="palette p1"></div><div class="palette p2"></div>
-      <div class="palette p3"></div><div class="palette p4"></div>
-      <div class="palette p5"></div><div class="palette p6"></div>
-      <div class="palette p7"></div><div class="palette p8"></div>
-    </div>
-    <span>आर्टिफिशियल इंटेलिजेंस द्वारा संचालित</span>
+<div class="env-hero">
+  <div class="hero-content">
+    <h1>पर्यावरण और पृथ्वी</h1>
+    <p style="color: #ddd; font-size: 1.2rem; max-width: 600px; text-shadow: 0 2px 5px rgba(0,0,0,0.8);">जलवायु परिवर्तन, सैटेलाइट मॉनिटरिंग और पृथ्वी को बचाने के लिए विज्ञान के नवीनतम प्रयास।</p>
   </div>
-</section>
+</div>
 
-<!-- ═══ MISSION & VISION ═══ -->
-<section class="mission-vision-section">
-  <div class="content-container">
-    <div class="glass-card">
-      <div class="icon">🚀</div>
-      <h2>हमारा मिशन</h2>
-      <p>PrajnaAGI का मुख्य उद्देश्य अंतरिक्ष, विज्ञान, और नवीनतम तकनीक से जुड़ी जटिल जानकारियों को सरल और सटीक हिंदी में उपलब्ध कराना है। हम चाहते हैं कि भाषा कभी भी ज्ञान के रास्ते में बाधा न बने।</p>
+<div class="article-container">
+  <a href="#" style="text-decoration: none; color: inherit; display: block;" class="article-card">
+    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600" class="card-img" alt="NISAR Satellite"></div>
+    <div class="card-body">
+      <span class="card-badge">सैटेलाइट मिशन</span>
+      <h3>NISAR उपग्रह: हर 12 दिन में पृथ्वी का नया नक्शा</h3>
+      <p>ISRO और NASA का संयुक्त रडार मिशन जलवायु परिवर्तन, भूस्खलन और कृषि की ट्रैकिंग करने में कैसे मदद करेगा।</p>
+      <a href="#" class="read-more">पूरा पढ़ें →</a>
     </div>
-    <div class="glass-card">
-      <div class="icon">👁️</div>
-      <h2>हमारा नज़रिया</h2>
-      <p>एक ऐसा डिजिटल प्लेटफॉर्म बनाना जहाँ हर हिंदी भाषी युवा ब्रह्मांड के रहस्यों और अत्याधुनिक तकनीकी प्रगति (जैसे क्वांटम कंप्यूटिंग और एआई) को अपनी मातृभाषा में समझ सके और भविष्य के निर्माण में योगदान दे सके।</p>
+  </a>
+  <a href="#" style="text-decoration: none; color: inherit; display: block;" class="article-card">
+    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=600" class="card-img" alt="Himalayan Glaciers"></div>
+    <div class="card-body">
+      <span class="card-badge">जलवायु संकट</span>
+      <h3>हिमालय के ग्लेशियर: 65% तेजी से पिघलने का खतरा</h3>
+      <p>समुद्र का स्तर बढ़ने की चेतावनी और एशिया की प्रमुख नदियों के जल स्तर पर इसका गंभीर प्रभाव।</p>
+      <a href="#" class="read-more">पूरा पढ़ें →</a>
     </div>
-    <div class="glass-card">
-      <div class="icon">💡</div>
-      <h2>हमारे मूल्य</h2>
-      <p>सटीकता, सरलता, और प्रेरणा। हम सुनिश्चित करते हैं कि हमारी हर खबर और लेख वैज्ञानिक तथ्यों पर आधारित हो और पाठकों को नई ऊंचाइयों को छूने के लिए हमेशा प्रेरित करे।</p>
+  </a>
+  <a href="#" style="text-decoration: none; color: inherit; display: block;" class="article-card">
+    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&q=80&w=600" class="card-img" alt="Wildlife AI"></div>
+    <div class="card-body">
+      <span class="card-badge">वन्यजीव</span>
+      <h3>AI से बचाए जा रहे हैं विलुप्त होते जीव</h3>
+      <p>ड्रोन और डीप लर्निंग का उपयोग करके जंगलों में जानवरों की गिनती और शिकारियों पर नजर रखना।</p>
+      <a href="#" class="read-more">पूरा पढ़ें →</a>
     </div>
-  </div>
-</section>
+  </a>
+</div>
 
-<script>
-const canvas = document.getElementById('spaceCanvas');
-const ctx = canvas.getContext('2d');
-let width, height;
-
-// Solar System Elements[cite: 3]
-const planets = [
-  { name: 'Sun', r: 50, orbit: 0, speed: 0, color: '#F4C430', mass: 450, angle: 0 },
-  { name: 'Earth', r: 18, orbit: 260, speed: 0.007, color: '#4a90e2', mass: 130, angle: 1.5 },
-  { name: 'Moon', r: 6, orbit: 45, speed: 0.04, color: '#ddd', mass: 45, angle: 0, isMoon: true },
-  { name: 'Mars', r: 14, orbit: 410, speed: 0.005, color: '#e74c3c', mass: 100, angle: 3.5 },
-  { name: 'Jupiter', r: 45, orbit: 620, speed: 0.002, color: '#eb984e', mass: 380, angle: 0.5 }
-];
-
-function init() {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', init);
-init();
-
-function draw() {
-  ctx.fillStyle = '#000';
-  ctx.fillRect(0, 0, width, height);
-  const centerX = width / 2;
-  const centerY = height / 2;
-  const distortElements = document.querySelectorAll('.distort-target');
-
-  planets.forEach(p => {
-    p.angle += p.speed;
-    if(p.isMoon) {
-      const earth = planets[1];
-      p.x = centerX + Math.cos(earth.angle) * earth.orbit + Math.cos(p.angle) * p.orbit;
-      p.y = centerY + Math.sin(earth.angle) * earth.orbit + Math.sin(p.angle) * p.orbit;
-    } else {
-      p.x = centerX + Math.cos(p.angle) * p.orbit;
-      p.y = centerY + Math.sin(p.angle) * p.orbit;
-    }
-  });
-
-  // Grid with Curvature Distortion[cite: 3]
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-  const step = 45;
-  for(let x = 0; x < width + step; x += step) {
-    ctx.beginPath();
-    for(let y = 0; y < height; y += 10) {
-      let gx = x, gy = y;
-      planets.forEach(p => {
-        const dx = gx - p.x, dy = gy - p.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        const pull = p.mass / (dist/12 + 1);
-        if(dist < 320) { gx -= (dx/dist)*pull; gy -= (dy/dist)*pull; }
-      });
-      if(y === 0) ctx.moveTo(gx, gy); else ctx.lineTo(gx, gy);
-    }
-    ctx.stroke();
-  }
-  for(let y = 0; y < height + step; y += step) {
-    ctx.beginPath();
-    for(let x = 0; x < width; x += 10) {
-      let gx = x, gy = y;
-      planets.forEach(p => {
-        const dx = gx - p.x, dy = gy - p.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        const pull = p.mass / (dist/12 + 1);
-        if(dist < 320) { gx -= (dx/dist)*pull; gy -= (dy/dist)*pull; }
-      });
-      if(x === 0) ctx.moveTo(gx, gy); else ctx.lineTo(gx, gy);
-    }
-    ctx.stroke();
-  }
-
-  planets.forEach(p => {
-    ctx.beginPath();
-    ctx.shadowBlur = 25; ctx.shadowColor = p.color;
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-    ctx.fillStyle = p.color;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-
-    distortElements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      const elX = rect.left + rect.width/2;
-      const elY = rect.top + rect.height/2;
-      const d = Math.sqrt((elX-p.x)**2 + (elY-p.y)**2);
-      if(d < 280) {
-        const force = (280-d) / 18;
-        const ang = Math.atan2(elY-p.y, elX-p.x);
-        el.style.transform = `translate(${Math.cos(ang)*force}px, ${Math.sin(ang)*force}px)`;
-      }
-    });
-  });
-
-  requestAnimationFrame(draw);
-}
-draw();
-</script>
-<!-- ═══ NEWSLETTER ═══ -->
+<!-- ── NEWSLETTER ── -->
 <section class="newsletter-section">
-    <h2>अंतरिक्ष की खबरें सीधे Inbox में 📬</h2>
+    <h2>पर्यावरण की खबरें सीधे Inbox में 📬</h2>
     <p style="color:var(--text-muted);margin:0.8rem 0 0;">हर हफ्ते नई साइंस न्यूज और मिशन अपडेट पाएं।</p>
     <div class="newsletter-input-group">
         <input type="email" class="newsletter-input" placeholder="आपका ईमेल पता लिखें...">
         <button class="subscribe-btn">सदस्यता लें</button>
     </div>
-    <p style="color:var(--accent-blue);font-weight:700;margin-top:0.5rem;">✨ 10k+ पाठक पहले से जुड़े हैं।</p>
+    <p style="color:var(--accent-blue);font-weight:700;margin-top:0.5rem;">✨ 10+ पाठक पहले से जुड़े हैं।</p>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- ── FOOTER ── -->
 <footer>
     <div class="footer-grid">
         <div class="footer-col">
@@ -550,9 +305,9 @@ draw();
             <h4>महत्वपूर्ण लिंक</h4>
             <ul>
                 <li><a href="about.html" style="text-decoration:none;color:inherit;display:block;">🙏 हमारे बारे में</a></li>
-                <li><a href="/contact.html" style="text-decoration:none;color:inherit;display:block;">📞 संपर्क करें</a></li>
-                <li><a href="/privacy.html" style="text-decoration:none;color:inherit;display:block;">🔒 गोपनीयता नीति</a></li>
-                <li><a href="/terms.html" style="text-decoration:none;color:inherit;display:block;">📋 उपयोग की शर्तें</a></li>
+                <li><a href="#" style="text-decoration:none;color:inherit;display:block;">📞 संपर्क करें</a></li>
+                <li><a href="#" style="text-decoration:none;color:inherit;display:block;">🔒 गोपनीयता नीति</a></li>
+                <li><a href="#" style="text-decoration:none;color:inherit;display:block;">📋 उपयोग की शर्तें</a></li>
             </ul>
         </div>
     </div>
@@ -560,7 +315,6 @@ draw();
 </footer>
 
 <script>
-    // ── Shared UI Scripts ────────────────────────────────────────
     if (typeof isDark === 'undefined') {
         window.isDark = function() {
             return document.body.getAttribute('data-theme') !== 'light';
@@ -625,10 +379,10 @@ draw();
         });
     }
 
-    // ── Header Subscribe Scroll ────────────────────────────
+    // Header Subscribe Scroll
     const scrollSubBtns = document.querySelectorAll('.subscribe-nav-btn, .mobile-menu a[href="#"]');
     scrollSubBtns.forEach(btn => {
-        if(btn.textContent.includes('सब्स्क्रिप्शन')) {
+        if(btn.textContent.includes('सब्सक्रिप्शन')) {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = document.querySelector('.newsletter-section');
@@ -661,4 +415,3 @@ draw();
 </script>
 </body>
 </html>
-

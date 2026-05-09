@@ -4,43 +4,24 @@
 <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>स्वास्थ्य विज्ञान — PrajnaAGI</title>
-<!-- Open Graph / WhatsApp -->
-<meta property="og:title" content="स्वास्थ्य विज्ञान — PrajnaAGI">
-<meta property="og:description" content="विज्ञान, अंतरिक्ष और तकनीक की ताज़ा खोजों का विश्वसनीय स्रोत (PrajnaAGI)">
-<meta property="og:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000">
-<meta property="og:type" content="website">
-
-<!-- X / Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="स्वास्थ्य विज्ञान — PrajnaAGI">
-<meta name="twitter:description" content="विज्ञान, अंतरिक्ष और तकनीक की ताज़ा खोजों का विश्वसनीय स्रोत (PrajnaAGI)">
-<meta name="twitter:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000">
+<title>अंतरिक्ष — PrajnaAGI</title>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Devanagari:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
-  :root { --transition-theme: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.3s ease; }
-  [data-theme="dark"] { --bg:#080808; --surface:#1a1a1a; --border:rgba(255,255,255,0.08); --text:#f0f0f0; --muted:#999; --accent:#F4C430; --accent-bg:rgba(244,196,48,0.1); --accent-glow:rgba(244,196,48,0.4); --btn-text:#080808;}
-  [data-theme="light"] { --bg:#f7f6f2; --surface:#ffffff; --border:rgba(0,0,0,0.08); --text:#111111; --muted:#555; --accent:#D4AA00; --accent-bg:rgba(212,170,0,0.1); --accent-glow:rgba(212,170,0,0.4); --btn-text:#ffffff;}
+  :root { --transition-theme: background 0.35s ease, color 0.35s ease; }
+  [data-theme="dark"] { --bg:#080808; --surface:#1a1a1a; --text:#f0f0f0; --accent:#F4C430; --btn-text:#080808; }
+  [data-theme="light"] { --bg:#f7f6f2; --surface:#ffffff; --text:#111111; --accent:#D4AA00; --btn-text:#ffffff; }
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-  body{background:var(--bg);color:var(--text);font-family:'Noto Sans Devanagari',sans-serif;margin:0;transition:var(--transition-theme);}
-
-  .health-hero { height:60vh; background:url('https://images.unsplash.com/photo-1530213786676-417244ee9f74?auto=format&fit=crop&q=80&w=1920') no-repeat center center/cover; position:relative; display:flex; align-items:flex-end; padding:4rem 4%; }
-  .health-hero::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,var(--bg) 0%,transparent 80%); }
-  .hero-content { position:relative; z-index:10; animation:fadeUp 1s ease; }
-  .hero-content h1 { font-family:'Tiro Devanagari Hindi',serif; font-size:4rem; margin:0 0 10px 0; color:#fff; text-shadow:0 4px 15px rgba(0,0,0,0.8);}
-
-  .article-container { max-width:1320px; margin:4rem auto; padding:0 2rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2.5rem; }
-  .article-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; transition:transform 0.3s,box-shadow 0.3s; cursor:pointer; display:flex; flex-direction:column;}
-  .article-card:hover { transform:translateY(-8px); border-color:var(--accent); box-shadow:0 10px 30px var(--accent-glow); }
-  .card-img { width:100%; height:220px; object-fit:cover; transition:transform 0.5s;}
-  .article-card:hover .card-img { transform:scale(1.05); }
-  .card-img-wrap { overflow:hidden; position:relative; }
-  .card-body { padding:1.5rem; flex:1; display:flex; flex-direction:column;}
-  .card-badge { align-self:flex-start; background:var(--accent-bg); color:var(--accent); border:1px solid var(--accent); padding:4px 10px; border-radius:4px; font-size:0.75rem; font-weight:800; text-transform:uppercase; margin-bottom:1rem;}
-  .card-body h3 { margin:0 0 10px 0; font-size:1.3rem; line-height:1.4; color:var(--text); font-family:'Tiro Devanagari Hindi',serif;}
-  .card-body p { color:var(--muted); font-size:0.9rem; line-height:1.6; margin-bottom:1.5rem; flex:1;}
-  .read-more { color:var(--accent); font-size:0.85rem; font-weight:700; text-decoration:none; text-transform:uppercase; letter-spacing:1px;}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  body{background:var(--bg);color:var(--text);font-family:'Noto Sans Devanagari',sans-serif;margin:0;overflow-x:hidden;}
+  html,body{height:100%;}
+  .snap-container{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .space-section{height:100vh;width:100%;scroll-snap-align:start;background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:10vh 5vw;position:relative;}
+  .space-section::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,transparent 60%);z-index:1;pointer-events:none;}
+  .space-content{position:relative;z-index:2;max-width:800px;animation:fadeInUp 1s ease forwards;opacity:0;transform:translateY(20px);}
+  .space-title{font-family:'Tiro Devanagari Hindi',serif;font-size:4.5rem;color:#fff;margin-bottom:1rem;line-height:1.1;text-shadow:0 4px 20px rgba(0,0,0,0.5);}
+  .space-desc{font-size:1.2rem;color:#ccc;margin-bottom:2rem;line-height:1.6;}
+  .btn-outline{border:2px solid #fff;padding:12px 35px;color:#fff;background:rgba(0,0,0,0.3);text-transform:uppercase;font-weight:bold;cursor:pointer;transition:all 0.3s;backdrop-filter:blur(5px);font-size:0.9rem;letter-spacing:1px;}
+  .btn-outline:hover{background:#fff;color:#000;}
+  @keyframes fadeInUp{to{opacity:1;transform:translateY(0);}}
 </style>
 <style>
 :root {
@@ -48,8 +29,7 @@
     --accent:#E1AD01; --accent-blue:#58CCED;
     --accent-glow:rgba(225,173,1,0.35);
     --text-main:#ffffff; --text-muted:#a0a0a0;
-    --border:rgba(225,173,1,0.2);
-    --nav-bg:rgba(0,0,0,0.88);
+    --border:rgba(225,173,1,0.2); --nav-bg:rgba(0,0,0,0.88);
     --transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
 }
 [data-theme="light"] {
@@ -59,13 +39,7 @@
     --text-main:#111111; --text-muted:#555555;
     --border:rgba(0,0,0,0.12); --nav-bg:rgba(255,255,255,0.92);
 }
-nav {
-    position:sticky; top:0; z-index:1000;
-    background:var(--nav-bg) !important; backdrop-filter:blur(18px) !important;
-    -webkit-backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--border) !important; padding:0 2rem !important;
-    transition:background 0.4s; display:flex !important;
-}
+nav { position:sticky; top:0; z-index:1000; background:var(--nav-bg) !important; backdrop-filter:blur(18px) !important; -webkit-backdrop-filter:blur(18px); border-bottom:1px solid var(--border) !important; padding:0 2rem !important; transition:background 0.4s; display:flex !important; }
 .nav-inner { max-width:1400px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:70px; width:100%; }
 .brand-container { display:flex; align-items:center; gap:12px; }
 #headerBlackHole { width:50px; height:50px; flex-shrink:0; }
@@ -121,11 +95,11 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
             <canvas id="headerBlackHole"></canvas>
             <a href="index.html" class="logo"><span>PrajnaAGI</span></a>
             <ul class="menu-tabs">
-                <li><a href="space.html">🌌 अंतरिक्ष</a></li>
+                <li><a href="space.html" class="active">🌌 अंतरिक्ष</a></li>
                 <li><a href="science.html">🔬 विज्ञान</a></li>
                 <li><a href="tech.html">💻 तकनीक</a></li>
                 <li><a href="environment.html">🌿 पर्यावरण</a></li>
-                <li><a href="health.html" class="active">❤️ स्वास्थ्य</a></li>
+                <li><a href="health.html">❤️ स्वास्थ्य</a></li>
                 <li><a href="about.html">🙏 हमारे बारे में</a></li>
             </ul>
         </div>
@@ -152,52 +126,44 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
     </ul>
 </div>
 
-<div class="health-hero">
-  <div class="hero-content">
-    <h1>स्वास्थ्य विज्ञान</h1>
-    <p style="color:#ddd;font-size:1.2rem;max-width:600px;text-shadow:0 2px 5px rgba(0,0,0,0.8);">मेडिकल साइंस, DNA एडिटिंग (CRISPR), और AI द्वारा दवाओं की खोज में हो रहे क्रांतिकारी बदलाव।</p>
-  </div>
-</div>
+<div class="snap-container">
+  <!-- Section 1 -->
+  <section class="space-section" style="background-image:url('https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&q=80&w=1920');">
+    <div class="space-content" style="animation-delay:0.2s;">
+      <h2 class="space-title">STARSHIP<br>MISSION 2025</h2>
+      <p class="space-desc">मानवता का मंगल और परे सबसे बड़ा कदम। SpaceX का पूर्ण कक्षीय उड़ान परीक्षण जल्द ही इतिहास रचेगा।</p>
+      <button class="btn-outline">मिशन अपडेट्स देखें</button>
+    </div>
+  </section>
 
-<div class="article-container">
-  <a href="#" style="text-decoration:none;color:inherit;display:block;" class="article-card">
-    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&q=80&w=600" class="card-img" alt="AlphaFold"></div>
-    <div class="card-body">
-      <span class="card-badge">मेडिकल AI</span>
-      <h3>AlphaFold 3 से कैंसर के इलाज की नई उम्मीद</h3>
-      <p>Google DeepMind ने प्रोटीन संरचनाओं को डिकोड किया। नई दवाओं की खोज अब सालों की बजाय हफ्तों में हो सकेगी।</p>
-      <a href="#" class="read-more">पूरा पढ़ें →</a>
+  <!-- Section 2 -->
+  <section class="space-section" style="background-image:url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=1920');">
+    <div class="space-content">
+      <h2 class="space-title">गगनयान<br>ISRO की उड़ान</h2>
+      <p class="space-desc">भारत का पहला मानव अंतरिक्ष मिशन। 400km की कक्षा में 3 दिन का ऐतिहासिक सफर।</p>
+      <button class="btn-outline">पूरी खबर पढ़ें</button>
     </div>
-  </a>
-  <a href="#" style="text-decoration:none;color:inherit;display:block;" class="article-card">
-    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80&w=600" class="card-img" alt="CRISPR"></div>
-    <div class="card-body">
-      <span class="card-badge">बायोटेक</span>
-      <h3>जीन एडिटिंग (CRISPR) के नए प्रयोग</h3>
-      <p>जन्मजात बीमारियों को जड़ से खत्म करने के लिए DNA एडिटिंग तकनीक के पहले सफल मानव परीक्षण के नतीजे।</p>
-      <a href="#" class="read-more">पूरा पढ़ें →</a>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="space-section" style="background-image:url('https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?auto=format&fit=crop&q=80&w=1920');">
+    <div class="space-content">
+      <h2 class="space-title">JAMES WEBB<br>TELESCOPE</h2>
+      <p class="space-desc">13 अरब साल पुराने ब्रह्मांड के रहस्य और K2-18b ग्रह पर जीवन के नए संकेत।</p>
+      <button class="btn-outline">गैलरी देखें</button>
     </div>
-  </a>
-  <a href="#" style="text-decoration:none;color:inherit;display:block;" class="article-card">
-    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=600" class="card-img" alt="AI Drug"></div>
-    <div class="card-body">
-      <span class="card-badge">फार्मा</span>
-      <h3>AI से खोजी गई TB की नई दवा का परीक्षण</h3>
-      <p>भारतीय शोधकर्ताओं और AI के संयोजन से खोजी गई नई दवा ने क्लीनिकल ट्रायल के पहले चरण को किया पार।</p>
-      <a href="#" class="read-more">पूरा पढ़ें →</a>
-    </div>
-  </a>
+  </section>
 </div>
 
 <!-- ── NEWSLETTER ── -->
 <section class="newsletter-section">
-    <h2>स्वास्थ्य की खबरें सीधे Inbox में 📬</h2>
+    <h2>अंतरिक्ष की खबरें सीधे Inbox में 📬</h2>
     <p style="color:var(--text-muted);margin:0.8rem 0 0;">हर हफ्ते नई साइंस न्यूज और मिशन अपडेट पाएं।</p>
     <div class="newsletter-input-group">
         <input type="email" class="newsletter-input" placeholder="आपका ईमेल पता लिखें...">
         <button class="subscribe-btn">सदस्यता लें</button>
     </div>
-    <p style="color:var(--accent-blue);font-weight:700;margin-top:0.5rem;">✨ 10k+ पाठक पहले से जुड़े हैं।</p>
+    <p style="color:var(--accent-blue);font-weight:700;margin-top:0.5rem;">✨ 10+ पाठक पहले से जुड़े हैं।</p>
 </section>
 
 <!-- ── FOOTER ── -->
@@ -221,9 +187,9 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
             <h4>महत्वपूर्ण लिंक</h4>
             <ul>
                 <li><a href="about.html" style="text-decoration:none;color:inherit;display:block;">🙏 हमारे बारे में</a></li>
-                <li><a href="/contact.html" style="text-decoration:none;color:inherit;display:block;">📞 संपर्क करें</a></li>
-                <li><a href="/privacy.html" style="text-decoration:none;color:inherit;display:block;">🔒 गोपनीयता नीति</a></li>
-                <li><a href="/terms.html" style="text-decoration:none;color:inherit;display:block;">📋 उपयोग की शर्तें</a></li>
+                <li><a href="#" style="text-decoration:none;color:inherit;display:block;">📞 संपर्क करें</a></li>
+                <li><a href="#" style="text-decoration:none;color:inherit;display:block;">🔒 गोपनीयता नीति</a></li>
+                <li><a href="#" style="text-decoration:none;color:inherit;display:block;">📋 उपयोग की शर्तें</a></li>
             </ul>
         </div>
     </div>
@@ -259,7 +225,6 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
         }
         drawHeaderHole();
     }
-
     const themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) {
         themeBtn.addEventListener('click', function () {
@@ -268,7 +233,6 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
             this.textContent = next === 'light' ? '🌙 रात' : '☀️ दिन';
         });
     }
-
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     if (hamburger && mobileMenu) {
@@ -278,27 +242,19 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
             this.setAttribute('aria-label', isOpen ? 'मेनू बंद करें' : 'मेनू खोलें');
         });
         mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-                hamburger.classList.remove('open');
-            });
+            link.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); });
         });
     }
-
     document.querySelectorAll('.subscribe-nav-btn, .mobile-menu a[href="#"]').forEach(btn => {
         if (btn.textContent.includes('सब्सक्रिप्शन')) {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = document.querySelector('.newsletter-section');
                 if (target) target.scrollIntoView({ behavior: 'smooth' });
-                if (mobileMenu && mobileMenu.classList.contains('open')) {
-                    mobileMenu.classList.remove('open');
-                    hamburger.classList.remove('open');
-                }
+                if (mobileMenu && mobileMenu.classList.contains('open')) { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); }
             });
         }
     });
-
     const subBtn = document.querySelector('.subscribe-btn');
     if (subBtn) {
         subBtn.addEventListener('click', function () {
