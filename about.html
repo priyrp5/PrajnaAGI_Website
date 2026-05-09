@@ -5,6 +5,17 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>हमारे बारे में — PrajnaAGI</title>
+<!-- Open Graph / WhatsApp -->
+<meta property="og:title" content="हमारे बारे में — PrajnaAGI">
+<meta property="og:description" content="विज्ञान, अंतरिक्ष और तकनीक की ताज़ा खोजों का विश्वसनीय स्रोत (PrajnaAGI)">
+<meta property="og:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000">
+<meta property="og:type" content="website">
+
+<!-- X / Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="हमारे बारे में — PrajnaAGI">
+<meta name="twitter:description" content="विज्ञान, अंतरिक्ष और तकनीक की ताज़ा खोजों का विश्वसनीय स्रोत (PrajnaAGI)">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000">
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root { 
@@ -18,7 +29,6 @@
     background: var(--bg); 
     color: #fff; 
     font-family: 'Noto Sans Devanagari', sans-serif; 
-    overflow: hidden; 
   }
 
   #spaceCanvas { 
@@ -30,7 +40,7 @@
   .about-section {
     position: relative;
     z-index: 10;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -283,6 +293,53 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
     .logo { font-size:1.4rem !important; }
     #headerBlackHole { width:40px; height:40px; }
 }
+
+/* ── MISSION & VISION ── */
+.mission-vision-section {
+    position: relative;
+    z-index: 10;
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.content-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+.glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: var(--transition);
+    text-align: center;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+.glass-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px var(--accent-glow);
+}
+.glass-card .icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+.glass-card h2 {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    margin-top: 0;
+}
+.glass-card p {
+    color: var(--text-main);
+    line-height: 1.8;
+    font-size: 1.05rem;
+    margin: 0;
+}
 </style>
 </head>
 <body data-theme="dark">
@@ -328,9 +385,9 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
 
 <!-- ═══ ABOUT CONTENT ═══ -->
 <section class="about-section">
-  <img src="about101.jpeg" class="profile-image distort-target" alt="Antigravity AI">
-  <h1 class="name distort-target">Antigravity AI</h1>
-  <div class="designation distort-target">Advanced AI Agent</div>
+  <img src="about101.jpeg" class="profile-image distort-target" alt="प्रिय रंजन पाण्डेय">
+  <h1 class="name distort-target">प्रिय रंजन पाण्डेय</h1>
+  <div class="designation distort-target">स्वामित्व एवं निर्माता</div>
   <div class="ai-badge distort-target">
     <div class="icon-wrapper">
       <svg class="main-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -340,6 +397,27 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
       <div class="palette p7"></div><div class="palette p8"></div>
     </div>
     <span>आर्टिफिशियल इंटेलिजेंस द्वारा संचालित</span>
+  </div>
+</section>
+
+<!-- ═══ MISSION & VISION ═══ -->
+<section class="mission-vision-section">
+  <div class="content-container">
+    <div class="glass-card">
+      <div class="icon">🚀</div>
+      <h2>हमारा मिशन</h2>
+      <p>PrajnaAGI का मुख्य उद्देश्य अंतरिक्ष, विज्ञान, और नवीनतम तकनीक से जुड़ी जटिल जानकारियों को सरल और सटीक हिंदी में उपलब्ध कराना है। हम चाहते हैं कि भाषा कभी भी ज्ञान के रास्ते में बाधा न बने।</p>
+    </div>
+    <div class="glass-card">
+      <div class="icon">👁️</div>
+      <h2>हमारा नज़रिया</h2>
+      <p>एक ऐसा डिजिटल प्लेटफॉर्म बनाना जहाँ हर हिंदी भाषी युवा ब्रह्मांड के रहस्यों और अत्याधुनिक तकनीकी प्रगति (जैसे क्वांटम कंप्यूटिंग और एआई) को अपनी मातृभाषा में समझ सके और भविष्य के निर्माण में योगदान दे सके।</p>
+    </div>
+    <div class="glass-card">
+      <div class="icon">💡</div>
+      <h2>हमारे मूल्य</h2>
+      <p>सटीकता, सरलता, और प्रेरणा। हम सुनिश्चित करते हैं कि हमारी हर खबर और लेख वैज्ञानिक तथ्यों पर आधारित हो और पाठकों को नई ऊंचाइयों को छूने के लिए हमेशा प्रेरित करे।</p>
+    </div>
   </div>
 </section>
 
