@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>लेख — PrajnaAGI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Devanagari:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        #spaceCanvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; width: 100%; height: 100%; }
+        .article-hero { height: 60vh; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 4rem 5%; }
+        .article-hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent, var(--bg-main)); }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+        .hero-content { position: relative; z-index: 2; max-width: 900px; }
+        .article-body { max-width: 800px; margin: -5rem auto 4rem; padding: 4rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 40px; position: relative; z-index: 5; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+        .article-body p { margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.15rem; color: var(--text-main); }
+        .article-body h2, .article-body h3 { margin: 2rem 0 1rem; color: var(--accent); }
+        .article-body img { width: 100%; border-radius: 20px; margin: 2rem 0; }
+        .article-body iframe { width: 100%; aspect-ratio: 16/9; border-radius: 20px; margin: 2rem 0; border: 1px solid var(--border); }
+        .loading-state { text-align: center; padding: 10rem 2rem; font-size: 1.5rem; }
+    </style>
+    <!-- Marked.js for Markdown Rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body data-theme="dark">
+    <canvas id="spaceCanvas"></canvas>
+
+    <div id="article-container">
+        <div class="loading-state">लेख लोड हो रहा है... ✨</div>
+    </div>
+
+    <script src="assets/js/canvas.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script>
+        async function loadFullArticle() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleTitle = urlParams.get('title');
+            const container = document.getElementById('article-container');
+
+            if (!articleTitle) {
+                container.innerHTML = '<div class="loading-state">लेख नहीं मिला। <br><a href="Index.html" style="color:var(--accent); font-size:1rem;">वापस जाएं</a></div>';
+                return;
+            }
+
+            try {
+                const response = await fetch('content/articles.json');
+                const data = await response.json();
+                const article = data.articles.find(a => a.title === articleTitle);
+
+                if (!article) {
+                    container.innerHTML = '<div class="loading-state">क्षमा करें, यह लेख अब उपलब्ध नहीं है।</div>';
+                    return;
+                }
+
+                document.title = `${article.title} — PrajnaAGI`;
+
+                container.innerHTML = `
+                    <div class="article-hero">
+                        <img src="${article.image || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200'}" class="hero-bg" alt="">
+                        <div class="hero-content">
+                            <span class="tag" style="background:var(--accent); color:#000; padding:0.4rem 1rem; border-radius:50px; font-weight:900; font-size:0.8rem;">${article.category}</span>
+                            <h1 style="font-size:3.5rem; margin-top:1.5rem; line-height:1.2;">${article.title}</h1>
+                            <p style="opacity:0.8; margin-top:1rem; font-size:1.2rem;">${new Date(article.date).toLocaleDateString('hi-IN', { dateStyle: 'long' })}</p>
+                        </div>
+                    </div>
+                    <div class="article-body">
+                        <div id="markdown-content"></div>
+                        <div style="margin-top:4rem; padding-top:2rem; border-top:1px solid var(--border); text-align:center;">
+                            <a href="Index.html" class="subscribe-btn" style="text-decoration:none;">मुख्य पृष्ठ पर वापस जाएं</a>
+                        </div>
+                    </div>
+                `;
+
+                // Render Markdown Body with custom tag support
+                let bodyHtml = marked.parse(article.body || '');
+                
+                // Convert youtube:ID to iframe
+                bodyHtml = bodyHtml.replace(/<code>youtube:(.*?)<\/code>/g, (match, id) => {
+                    return `<iframe src="https://www.youtube.com/embed/${id.trim()}" frameborder="0" allowfullscreen></iframe>`;
+                });
+
+                // Convert twitter:URL to embed placeholder (Simple version)
+                bodyHtml = bodyHtml.replace(/<code>twitter:(.*?)<\/code>/g, (match, url) => {
+                    return `<div style="border:1px solid var(--border); padding:1rem; border-radius:15px; margin:2rem 0; background:rgba(255,255,255,0.05);">
+                        <p style="font-size:0.9rem; opacity:0.7;">🔗 X (Twitter) Post:</p>
+                        <a href="${url.trim()}" target="_blank" style="color:var(--accent);">${url.trim()}</a>
+                    </div>`;
+                });
+
+                document.getElementById('markdown-content').innerHTML = bodyHtml;
+
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = '<div class="loading-state">लेख लोड करने में त्रुटि हुई।</div>';
+            }
+        }
+
+        window.onload = loadFullArticle;
+    </script>
+</body>
+</html>

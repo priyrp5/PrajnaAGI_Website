@@ -30,7 +30,7 @@ async function loadCMSCategoryArticles(containerId, categoryName) {
     }
 
     container.innerHTML = filtered.map(article => `
-        <a href="${article.url || '#'}" class="clickable-card">
+        <a href="article.html?title=${encodeURIComponent(article.title)}" class="clickable-card">
             <div style="height:200px; background:url('${article.image || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600'}') center/cover;"></div>
             <div style="padding:1.5rem;">
                 <span class="tag" style="color:var(--accent); font-weight:800; font-size:0.75rem;">${article.tag || categoryName}</span>
@@ -61,7 +61,7 @@ async function loadCMSLatestNews(containerId) {
     const latest = data.articles.slice(0, 6);
 
     container.innerHTML = latest.map(article => `
-        <a href="${article.url || '#'}" class="clickable-card">
+        <a href="article.html?title=${encodeURIComponent(article.title)}" class="clickable-card">
             <div style="height:180px; background:url('${article.image || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600'}') center/cover;"></div>
             <div style="padding:1.4rem;">
                 <span class="tag" style="color:var(--accent); font-weight:800; font-size:0.7rem;">${article.category}</span>
@@ -122,3 +122,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+

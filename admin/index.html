@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PrajnaAGI Content Manager</title>
-    <!-- Include the script that enables Netlify Identity on this page. -->
-    
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <!-- Include the script that builds the page and powers Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      // Register custom editor components
+      CMS.registerEditorComponent({
+        id: "youtube",
+        label: "YouTube",
+        fields: [{name: 'id', label: 'YouTube Video ID', widget: 'string'}],
+        pattern: /^youtube (\S+)$/,
+        fromBlock: function(match) { return { id: match[1] }; },
+        toBlock: function(obj) { return '`youtube:' + obj.id + '`'; },
+        toPreview: function(obj) {
+          return '<img src="http://img.youtube.com/vi/' + obj.id + '/0.jpg" alt="Youtube Video"/>';
+        }
+      });
+      
+      CMS.registerEditorComponent({
+        id: "twitter",
+        label: "X (Twitter)",
+        fields: [{name: 'url', label: 'Post URL', widget: 'string'}],
+        pattern: /^twitter (\S+)$/,
+        fromBlock: function(match) { return { url: match[1] }; },
+        toBlock: function(obj) { return '`twitter:' + obj.url + '`'; },
+        toPreview: function(obj) {
+          return '<blockquote>X Post: ' + obj.url + '</blockquote>';
+        }
+      });
+    </script>
   </body>
 </html>
-
-

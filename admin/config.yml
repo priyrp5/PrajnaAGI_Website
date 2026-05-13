@@ -3,6 +3,8 @@ backend:
   branch: master
   site_id: 201ab593-6a33-44ff-8bdd-f3187fc17521
 
+publish_mode: editorial_workflow
+
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
