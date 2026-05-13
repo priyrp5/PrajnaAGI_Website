@@ -1,192 +1,100 @@
 <!DOCTYPE html>
 <html lang="hi">
+
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>अंतरिक्ष — PrajnaAGI</title>
-<!-- Open Graph / WhatsApp -->
-<meta property="og:title" content="अंतरिक्ष — PrajnaAGI">
-<meta property="og:description" content="विज्ञान, अंतरिक्ष और तकनीक की ताज़ा खोजों का विश्वसनीय स्रोत (PrajnaAGI)">
-<meta property="og:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000">
-<meta property="og:type" content="website">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अंतरिक्ष — PrajnaAGI</title>
+    <!-- Open Graph / WhatsApp -->
+    <meta property="og:title" content="अंतरिक्ष — PrajnaAGI">
+    <meta property="og:description" content="ब्रह्मांड की गहराइयों की यात्रा — PrajnaAGI">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000">
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Devanagari:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        body { overflow: hidden; background: #000; }
+        .snap-container { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+        .space-section { height: 100vh; scroll-snap-align: start; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .space-section h2 { font-size: clamp(2rem, 5vw, 4rem); color: var(--accent); margin-bottom: 1.5rem; text-shadow: 0 0 30px var(--accent-glow); }
+        .space-section p { max-width: 800px; font-size: 1.2rem; color: #ccc; line-height: 1.6; }
+        
+        #spaceCanvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; width: 100%; height: 100%; }
 
-<!-- X / Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="अंतरिक्ष — PrajnaAGI">
-<meta name="twitter:description" content="विज्ञान, अंतरिक्ष और तकनीक की ताज़ा खोजों का विश्वसनीय स्रोत (PrajnaAGI)">
-<meta name="twitter:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000">
-<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Devanagari:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-<style>
-  :root { --transition-theme: background 0.35s ease, color 0.35s ease; }
-  [data-theme="dark"] { --bg:#080808; --surface:#1a1a1a; --text:#f0f0f0; --accent:#F4C430; --btn-text:#080808; }
-  [data-theme="light"] { --bg:#f7f6f2; --surface:#ffffff; --text:#111111; --accent:#D4AA00; --btn-text:#ffffff; }
-  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-  body{background:var(--bg);color:var(--text);font-family:'Noto Sans Devanagari',sans-serif;margin:0;overflow-x:hidden;}
-  html,body{height:100%;}
-  .snap-container{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
-  .space-section{height:100vh;width:100%;scroll-snap-align:start;background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:10vh 5vw;position:relative;}
-  .space-section::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,transparent 60%);z-index:1;pointer-events:none;}
-  .space-content{position:relative;z-index:2;max-width:800px;animation:fadeInUp 1s ease forwards;opacity:0;transform:translateY(20px);}
-  .space-title{font-family:'Tiro Devanagari Hindi',serif;font-size:4.5rem;color:#fff;margin-bottom:1rem;line-height:1.1;text-shadow:0 4px 20px rgba(0,0,0,0.5);}
-  .space-desc{font-size:1.2rem;color:#ccc;margin-bottom:2rem;line-height:1.6;}
-  .btn-outline{border:2px solid #fff;padding:12px 35px;color:#fff;background:rgba(0,0,0,0.3);text-transform:uppercase;font-weight:bold;cursor:pointer;transition:all 0.3s;backdrop-filter:blur(5px);font-size:0.9rem;letter-spacing:1px;}
-  .btn-outline:hover{background:#fff;color:#000;}
-  @keyframes fadeInUp{to{opacity:1;transform:translateY(0);}}
-</style>
-<style>
-:root {
-    --bg-matte:#0a0a0a; --bg-card:rgba(18,18,18,0.85);
-    --accent:#E1AD01; --accent-blue:#58CCED;
-    --accent-glow:rgba(225,173,1,0.35);
-    --text-main:#ffffff; --text-muted:#a0a0a0;
-    --border:rgba(225,173,1,0.2); --nav-bg:rgba(0,0,0,0.88);
-    --transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
-}
-[data-theme="light"] {
-    --bg-matte:#ececec; --bg-card:rgba(255,255,255,0.92);
-    --accent:#b88a00; --accent-blue:#007bbd;
-    --accent-glow:rgba(184,138,0,0.25);
-    --text-main:#111111; --text-muted:#555555;
-    --border:rgba(0,0,0,0.12); --nav-bg:rgba(255,255,255,0.92);
-}
-nav { position:fixed; top:0; left:0; width:100%; z-index:1000; background:var(--nav-bg) !important; backdrop-filter:blur(18px) !important; -webkit-backdrop-filter:blur(18px); border-bottom:1px solid var(--border) !important; padding:0 2rem !important; transition:background 0.4s; display:flex !important; }
-.nav-inner { max-width:1400px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:70px; width:100%; }
-.brand-container { display:flex; align-items:center; gap:12px; }
-#headerBlackHole { width:50px; height:50px; flex-shrink:0; }
-.logo { font-family:'Tiro Devanagari Hindi',serif; font-size:1.7rem !important; text-decoration:none; color:var(--text-main) !important; font-weight:bold; white-space:nowrap; }
-.logo span { color:var(--accent) !important; font-family:'Noto Sans Devanagari',sans-serif !important;}
-.menu-tabs { display:flex !important; gap:18px !important; list-style:none !important; margin-left:28px !important; }
-.menu-tabs li a { text-decoration:none !important; color:var(--text-main) !important; font-weight:500 !important; font-size:0.92rem !important; opacity:0.8; transition:var(--transition); white-space:nowrap; }
-.menu-tabs li a:hover { color:var(--accent) !important; opacity:1; text-shadow:0 0 10px var(--accent-glow); }
-.nav-controls { display:flex; gap:10px; align-items:center; }
-#theme-toggle { background:none; border:1px solid var(--border); color:var(--accent); padding:8px 16px; border-radius:50px; cursor:pointer; font-weight:700; font-size:0.85rem; font-family:'Noto Sans Devanagari',sans-serif; transition:var(--transition); }
-#theme-toggle:hover { background:var(--accent); color:#000; }
-.subscribe-nav-btn { background:var(--accent); border:none; padding:0.7rem 1.3rem; border-radius:8px; font-weight:800; cursor:pointer; color:#000; font-size:0.85rem; font-family:'Noto Sans Devanagari',sans-serif; transition:var(--transition); white-space:nowrap; }
-.subscribe-nav-btn:hover { opacity:0.85; transform:translateY(-1px); }
-.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:5px; }
-.hamburger span { display:block; width:24px; height:2px; background:var(--accent); border-radius:2px; transition:var(--transition); }
-.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity:0; }
-.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-.mobile-menu { display:none; background:var(--nav-bg); backdrop-filter:blur(18px); border-bottom:1px solid var(--border); max-height:0; overflow:hidden; transition:max-height 0.4s ease,padding 0.3s ease; position:fixed; width:100%; z-index:999; left:0; top:70px;}
-.mobile-menu.open { max-height:500px; padding:1rem 0; }
-.mobile-menu ul { list-style:none; max-width:1400px; margin:0 auto; padding:0 2rem; }
-.mobile-menu ul li a { display:block; text-decoration:none; color:var(--text-main); font-weight:500; font-size:1rem; padding:0.85rem 0; border-bottom:1px solid var(--border); transition:var(--transition); }
-.mobile-menu ul li:last-child a { border-bottom:none; }
-.mobile-menu ul li a:hover { color:var(--accent); padding-left:8px; }
-@media (max-width:1024px) { .menu-tabs { display:none !important; } .hamburger { display:flex !important; } .mobile-menu { display:block !important; } }
-@media (max-width:768px) { .nav-inner { height:62px; } .subscribe-nav-btn { display:none; } }
-@media (max-width:480px) { .logo { font-size:1.4rem !important; } #headerBlackHole { width:40px; height:40px; } }
-</style>
+        nav { background: rgba(0,0,0,0.8); }
+    </style>
 </head>
+
 <body data-theme="dark">
+    <canvas id="spaceCanvas"></canvas>
 
-<!-- ── NAVIGATION ── -->
-<nav>
-    <div class="nav-inner">
-        <div class="brand-container">
-            <canvas id="headerBlackHole"></canvas>
-            <a href="index.html" class="logo"><span>PrajnaAGI</span></a>
-            <ul class="menu-tabs">
-                <li><a href="space.html" class="active">🌌 अंतरिक्ष</a></li>
-                <li><a href="science.html">🔬 विज्ञान</a></li>
-                <li><a href="tech.html">💻 तकनीक</a></li>
-                <li><a href="environment.html">🌿 पर्यावरण</a></li>
-                <li><a href="health.html">❤️ स्वास्थ्य</a></li>
-                <li><a href="about.html">🙏 हमारे बारे में</a></li>
-            </ul>
+    <!-- ── NAVIGATION ── -->
+    <nav>
+        <div class="nav-inner">
+            <div class="brand-container">
+                <canvas id="headerBlackHole"></canvas>
+                <a href="index.html" class="logo"><span>PrajnaAGI</span></a>
+                <ul class="menu-tabs">
+                    <li><a href="space.html" class="active">🌌 अंतरिक्ष</a></li>
+                    <li><a href="science.html">🔬 विज्ञान</a></li>
+                    <li><a href="tech.html">💻 तकनीक</a></li>
+                    <li><a href="environment.html">🌿 पर्यावरण</a></li>
+                    <li><a href="health.html">❤️ स्वास्थ्य</a></li>
+                    <li><a href="about.html">🙏 हमारे बारे में</a></li>
+                </ul>
+            </div>
+            <div class="nav-controls">
+                <button id="theme-toggle">☀️ दिन</button>
+                <button class="subscribe-nav-btn">सब्सक्रिप्शन</button>
+                <button class="hamburger" id="hamburger" aria-label="मेनू खोलें">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
-        <div class="nav-controls">
-            <button id="theme-toggle">☀️ दिन</button>
-            <button class="subscribe-nav-btn">सब्सक्रिप्शन</button>
-            <button class="hamburger" id="hamburger" aria-label="मेनू खोलें">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
+    </nav>
+
+    <!-- ── MOBILE DROPDOWN ── -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="space.html">🌌 अंतरिक्ष</a></li>
+            <li><a href="science.html">🔬 विज्ञान</a></li>
+            <li><a href="tech.html">💻 तकनीक</a></li>
+            <li><a href="environment.html">🌿 पर्यावरण</a></li>
+            <li><a href="health.html">❤️ स्वास्थ्य</a></li>
+            <li><a href="about.html">🙏 हमारे बारे में</a></li>
+        </ul>
     </div>
-</nav>
 
-<!-- ── MOBILE DROPDOWN ── -->
-<div class="mobile-menu" id="mobileMenu">
-    <ul>
-        <li><a href="space.html">🌌 अंतरिक्ष</a></li>
-        <li><a href="science.html">🔬 विज्ञान</a></li>
-        <li><a href="tech.html">💻 तकनीक</a></li>
-        <li><a href="environment.html">🌿 पर्यावरण</a></li>
-        <li><a href="health.html">❤️ स्वास्थ्य</a></li>
-        <li><a href="about.html">🙏 हमारे बारे में</a></li>
-        <li><a href="#">📩 सब्सक्रिप्शन</a></li>
-    </ul>
-</div>
+    <div class="snap-container" id="cms-space-snap">
+        <section class="space-section">
+            <h2>ब्रह्मांड की गहराइयां</h2>
+            <p>लोड हो रहा है...</p>
+        </section>
+    </div>
 
-<div class="snap-container" id="cms-space-snap">
-  <!-- Dynamic Content from CMS -->
-  <section class="space-section" style="background: #000; display: flex; align-items: center; justify-content: center;">
-    <h2 style="color: #fff;">लोड हो रहा है...</h2>
-  </section>
-</div>
+    <script src="assets/js/canvas.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/cms-loader.js"></script>
+    <script>
+        // Custom snap loader override
+        async function loadSpaceSnap() {
+            const data = await fetchJSON('content/articles.json');
+            if (!data || !data.articles) return;
+            const filtered = data.articles.filter(a => a.category === 'अंतरिक्ष');
+            const container = document.getElementById('cms-space-snap');
+            if (!container || !filtered.length) return;
 
-<script src="cms-loader.js"></script>
-<script>
-    if (typeof isDark === 'undefined') {
-        window.isDark = function() {
-            return document.body.getAttribute('data-theme') !== 'light';
+            container.innerHTML = filtered.map(a => `
+                <section class="space-section" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('${a.image}') center/cover;">
+                    <span class="tag">${a.tag || 'अंतरिक्ष'}</span>
+                    <h2>${a.title}</h2>
+                    <p>${a.summary}</p>
+                    <a href="${a.url || '#'}" class="subscribe-btn" style="margin-top:2rem; text-decoration:none;">विस्तार से पढ़ें</a>
+                </section>
+            `).join('');
         }
-    }
-
-    const hCanvas = document.getElementById('headerBlackHole');
-    if (hCanvas) {
-        const hCtx = hCanvas.getContext('2d');
-        hCanvas.width = hCanvas.height = 110;
-        let timeHeader = 0;
-        function drawHeaderHole() {
-            timeHeader += 0.015;
-            hCtx.clearRect(0, 0, 110, 110);
-            hCtx.save();
-            hCtx.translate(55, 55);
-            hCtx.rotate(timeHeader * 2.2);
-            const g = hCtx.createRadialGradient(0, 0, 8, 0, 0, 44);
-            g.addColorStop(0,   '#000');
-            g.addColorStop(0.3, 'rgba(225,173,1,0.75)');
-            g.addColorStop(1,   'transparent');
-            hCtx.fillStyle = g;
-            hCtx.beginPath();
-            hCtx.ellipse(0, 0, 50, 14, 0, 0, Math.PI * 2);
-            hCtx.fill();
-            hCtx.fillStyle = '#000';
-            hCtx.beginPath();
-            hCtx.arc(0, 0, 15, 0, Math.PI * 2);
-            hCtx.fill();
-            hCtx.restore();
-            requestAnimationFrame(drawHeaderHole);
-        }
-        drawHeaderHole();
-    }
-
-    const themeBtn = document.getElementById('theme-toggle');
-    if (themeBtn) {
-        themeBtn.addEventListener('click', function () {
-            const next = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            document.body.setAttribute('data-theme', next);
-            this.textContent = next === 'light' ? '🌙 रात' : '☀️ दिन';
-        });
-    }
-
-    const hamburger  = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    if (hamburger && mobileMenu) {
-        hamburger.addEventListener('click', function () {
-            const isOpen = mobileMenu.classList.toggle('open');
-            hamburger.classList.toggle('open', isOpen);
-            this.setAttribute('aria-label', isOpen ? 'मेनू बंद करें' : 'मेनू खोलें');
-        });
-    }
-
-    // Load dynamic articles
-    document.addEventListener('DOMContentLoaded', () => {
-        loadCMSSpace('cms-space-snap');
-    });
-</script>
+        document.addEventListener('DOMContentLoaded', loadSpaceSnap);
+    </script>
 </body>
+
 </html>
