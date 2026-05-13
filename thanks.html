@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>धन्यवाद — PrajnaAGI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Noto+Sans+Devanagari:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        #spaceCanvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; width: 100%; height: 100%; }
+        .thanks-container { 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            padding: 2rem;
+        }
+        .thanks-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--accent);
+            padding: 4rem 2rem;
+            border-radius: 50px;
+            max-width: 600px;
+            box-shadow: 0 0 100px rgba(0, 242, 254, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .thanks-icon { font-size: 5rem; margin-bottom: 2rem; display: block; filter: drop-shadow(0 0 20px var(--accent)); }
+        h1 { font-size: 3rem; color: #fff; margin-bottom: 1.5rem; }
+        p { font-size: 1.2rem; opacity: 0.8; line-height: 1.8; margin-bottom: 2rem; }
+    </style>
+</head>
+<body data-theme="dark">
+    <canvas id="spaceCanvas"></canvas>
+    
+    <div class="thanks-container">
+        <div class="thanks-box">
+            <span class="thanks-icon">🌌</span>
+            <h1>आपका बहुत धन्यवाद!</h1>
+            <p>PrajnaAGI के प्रति आपका समर्थन हमारे लिए बहुत मायने रखता है। आपके योगदान की मदद से हम ब्रह्मांड की जटिल कहानियों को सरल हिंदी में और भी बेहतर तरीके से पेश कर पाएंगे।</p>
+            <a href="Index.html" class="subscribe-btn" style="text-decoration:none; display:inline-block;">मुख्य पृष्ठ पर वापस जाएं</a>
+        </div>
+    </div>
+
+    <script src="assets/js/canvas.js"></script>
+    <script>
+        // Special gratitude particle effect could go here
+    </script>
+</body>
+</html>

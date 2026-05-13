@@ -28,6 +28,13 @@ collections:
               - { label: "X (Twitter) URL", name: "x_link", widget: "string", required: false }
               - { label: "LinkedIn URL", name: "linkedin_link", widget: "string", required: false }
               - { label: "GitHub URL", name: "github_link", widget: "string", required: false }
+              - label: "💰 Payment Settings (India)"
+                name: "payments"
+                widget: "object"
+                fields:
+                  - { label: "Your UPI ID", name: "upi_id", widget: "string", hint: "Example: yourname@okaxis" }
+                  - { label: "UPI QR Code Image", name: "upi_qr", widget: "image", required: false }
+                  - { label: "Razorpay / External Link", name: "pay_link", widget: "string", required: false, hint: "Link to your Razorpay Payment Page or Button" }
 
   - name: "pages"
     label: "📄 Content Management"
@@ -48,7 +55,19 @@ collections:
               - { label: "Publish Date", name: "date", widget: "datetime" }
               - { label: "Summary (short)", name: "summary", widget: "text" }
               - { label: "Full Article Body", name: "body", widget: "markdown" }
+              - { label: "SEO Description", name: "meta_desc", widget: "string", hint: "Short description for Google and WhatsApp" }
+              - { label: "Social Image (OG Image)", name: "social_image", widget: "image", required: false, hint: "Image that appears when shared on X/WhatsApp" }
               - { label: "Cover Image URL", name: "image", widget: "image", required: false }
+              - label: "🛒 Recommended Products (Affiliate)"
+                name: "products"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Product Name", name: "name", widget: "string" }
+                  - { label: "Affiliate Link", name: "link", widget: "string" }
+                  - { label: "Product Image", name: "image", widget: "image", required: false }
+                  - { label: "Quick Desc / Why buy?", name: "desc", widget: "string" }
+                  - { label: "Button Text", name: "btn_text", widget: "string", default: "अभी खरीदें" }
 
       - name: "facts"
         label: "🌟 Did You Know? (Facts)"

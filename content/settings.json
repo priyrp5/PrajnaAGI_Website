@@ -1,0 +1,16 @@
+{
+  "site_name": "PrajnaAGI",
+  "tagline": "ब्रह्मांड की हर खबर",
+  "logo_text": "🌌 PrajnaAGI",
+  "footer_copy": "© 2026 PrajnaAGI. सर्वाधिकार सुरक्षित।",
+  "social": {
+    "x_link": "https://x.com/priyrp",
+    "linkedin_link": "",
+    "github_link": ""
+  },
+  "payments": {
+    "upi_id": "priyrpuco@ybl",
+    "upi_qr": "",
+    "pay_link": ""
+  }
+}

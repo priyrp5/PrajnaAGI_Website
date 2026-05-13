@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://prajnaagi.com/sitemap.xml
