@@ -8,15 +8,28 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <style>
         #spaceCanvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; width: 100%; height: 100%; }
-        .article-hero { height: 60vh; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 4rem 5%; }
-        .article-hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent, var(--bg-main)); }
+        .article-hero { height: 70vh; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 6rem 5%; }
+        .article-hero::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 40%; 
+            background: linear-gradient(to top, var(--bg-main) 0%, rgba(10, 10, 10, 0.8) 40%, transparent 100%); 
+            z-index: 1;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
         .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
         .hero-content { position: relative; z-index: 2; max-width: 900px; }
         .article-body { max-width: 800px; margin: -5rem auto 4rem; padding: 4rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 40px; position: relative; z-index: 5; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
         .article-body p { margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.15rem; color: var(--text-main); }
         .article-body h2, .article-body h3 { margin: 2rem 0 1rem; color: var(--accent); }
         .article-body img { width: 100%; border-radius: 20px; margin: 2rem 0; }
-        .article-body iframe { width: 100%; aspect-ratio: 16/9; border-radius: 20px; margin: 2rem 0; border: 1px solid var(--border); }
+        .article-body iframe { width: 100%; border-radius: 20px; border: 1px solid var(--border); }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 2rem 0; border-radius: 20px; border: 1px solid var(--border); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .loading-state { text-align: center; padding: 10rem 2rem; font-size: 1.5rem; }
     </style>
     <!-- Marked.js for Markdown Rendering -->
@@ -81,20 +94,32 @@
                 // Render Markdown Body with custom tag support
                 let bodyHtml = marked.parse(article.body || '');
                 
-                // Convert youtube:ID to iframe
+                // 1. Convert youtube:ID to iframe
                 bodyHtml = bodyHtml.replace(/<code>youtube:(.*?)<\/code>/g, (match, id) => {
-                    return `<iframe src="https://www.youtube.com/embed/${id.trim()}" frameborder="0" allowfullscreen></iframe>`;
+                    return `<div class="video-container"><iframe src="https://www.youtube.com/embed/${id.trim()}" frameborder="0" allowfullscreen></iframe></div>`;
                 });
 
-                // Convert twitter:URL to embed placeholder (Simple version)
+                // 2. Convert twitter:URL to REAL Embed
                 bodyHtml = bodyHtml.replace(/<code>twitter:(.*?)<\/code>/g, (match, url) => {
-                    return `<div style="border:1px solid var(--border); padding:1rem; border-radius:15px; margin:2rem 0; background:rgba(255,255,255,0.05);">
-                        <p style="font-size:0.9rem; opacity:0.7;">🔗 X (Twitter) Post:</p>
-                        <a href="${url.trim()}" target="_blank" style="color:var(--accent);">${url.trim()}</a>
-                    </div>`;
+                    return `<blockquote class="twitter-tweet" data-theme="dark"><a href="${url.trim()}"></a></blockquote>`;
+                });
+
+                // 3. MAGIC AUTO-DETECTOR: Convert raw X links to Embeds
+                bodyHtml = bodyHtml.replace(/<p><a href="(https?:\/\/(x|twitter)\.com\/.*?)">.*?<\/a><\/p>/g, (match, url) => {
+                    return `<blockquote class="twitter-tweet" data-theme="dark"><a href="${url}"></a></blockquote>`;
+                });
+                
+                // 4. MAGIC AUTO-DETECTOR: Convert raw YouTube links to Embeds
+                bodyHtml = bodyHtml.replace(/<p><a href="https?:\/\/www\.youtube\.com\/watch\?v=(.*?)">.*?<\/a><\/p>/g, (match, id) => {
+                    return `<div class="video-container"><iframe src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe></div>`;
                 });
 
                 document.getElementById('markdown-content').innerHTML = bodyHtml;
+                
+                // Trigger Twitter Script to scan for new tweets
+                if (window.twttr) {
+                    window.twttr.widgets.load();
+                }
 
             } catch (e) {
                 console.error(e);
