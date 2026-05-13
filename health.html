@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
@@ -30,7 +30,7 @@
   .hero-content h1 { font-family:'Tiro Devanagari Hindi',serif; font-size:4rem; margin:0 0 10px 0; color:#fff; text-shadow:0 4px 15px rgba(0,0,0,0.8);}
 
   .article-container { max-width:1320px; margin:4rem auto; padding:0 2rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2.5rem; }
-  .article-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; transition:transform 0.3s,box-shadow 0.3s; cursor:pointer; display:flex; flex-direction:column;}
+  .article-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; transition:transform 0.3s,box-shadow 0.3s; display:flex; flex-direction:column;}
   .article-card:hover { transform:translateY(-8px); border-color:var(--accent); box-shadow:0 10px 30px var(--accent-glow); }
   .card-img { width:100%; height:220px; object-fit:cover; transition:transform 0.5s;}
   .article-card:hover .card-img { transform:scale(1.05); }
@@ -39,7 +39,10 @@
   .card-badge { align-self:flex-start; background:var(--accent-bg); color:var(--accent); border:1px solid var(--accent); padding:4px 10px; border-radius:4px; font-size:0.75rem; font-weight:800; text-transform:uppercase; margin-bottom:1rem;}
   .card-body h3 { margin:0 0 10px 0; font-size:1.3rem; line-height:1.4; color:var(--text); font-family:'Tiro Devanagari Hindi',serif;}
   .card-body p { color:var(--muted); font-size:0.9rem; line-height:1.6; margin-bottom:1.5rem; flex:1;}
-  .read-more { color:var(--accent); font-size:0.85rem; font-weight:700; text-decoration:none; text-transform:uppercase; letter-spacing:1px;}
+  .read-more-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; cursor: pointer; margin-top: auto; font-family: 'Noto Sans Devanagari', sans-serif; transition: var(--transition-theme); align-self: flex-start;}
+  .read-more-btn:hover { background: var(--accent); color: var(--btn-text); }
+  .full-article-content { display: none; margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.95rem; line-height: 1.8; animation: fadeUp 0.4s ease; text-align: left; }
+  .full-article-content p { margin-bottom: 0.8rem; }
   @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 </style>
 <style>
@@ -159,34 +162,11 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
   </div>
 </div>
 
-<div class="article-container">
-  <a href="#" style="text-decoration:none;color:inherit;display:block;" class="article-card">
-    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&q=80&w=600" class="card-img" alt="AlphaFold"></div>
-    <div class="card-body">
-      <span class="card-badge">मेडिकल AI</span>
-      <h3>AlphaFold 3 से कैंसर के इलाज की नई उम्मीद</h3>
-      <p>Google DeepMind ने प्रोटीन संरचनाओं को डिकोड किया। नई दवाओं की खोज अब सालों की बजाय हफ्तों में हो सकेगी।</p>
-      <a href="#" class="read-more">पूरा पढ़ें →</a>
-    </div>
-  </a>
-  <a href="#" style="text-decoration:none;color:inherit;display:block;" class="article-card">
-    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80&w=600" class="card-img" alt="CRISPR"></div>
-    <div class="card-body">
-      <span class="card-badge">बायोटेक</span>
-      <h3>जीन एडिटिंग (CRISPR) के नए प्रयोग</h3>
-      <p>जन्मजात बीमारियों को जड़ से खत्म करने के लिए DNA एडिटिंग तकनीक के पहले सफल मानव परीक्षण के नतीजे।</p>
-      <a href="#" class="read-more">पूरा पढ़ें →</a>
-    </div>
-  </a>
-  <a href="#" style="text-decoration:none;color:inherit;display:block;" class="article-card">
-    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=600" class="card-img" alt="AI Drug"></div>
-    <div class="card-body">
-      <span class="card-badge">फार्मा</span>
-      <h3>AI से खोजी गई TB की नई दवा का परीक्षण</h3>
-      <p>भारतीय शोधकर्ताओं और AI के संयोजन से खोजी गई नई दवा ने क्लीनिकल ट्रायल के पहले चरण को किया पार।</p>
-      <a href="#" class="read-more">पूरा पढ़ें →</a>
-    </div>
-  </a>
+<div class="article-container" id="cms-health-grid">
+  <!-- Dynamic Content from CMS -->
+  <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--muted);">
+    लोड हो रहा है...
+  </div>
 </div>
 
 <!-- ── NEWSLETTER ── -->
@@ -230,7 +210,14 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
     <p class="footer-bottom">© 2026 PrajnaAGI. सर्वाधिकार सुरक्षित।</p>
 </footer>
 
+<script src="cms-loader.js"></script>
 <script>
+    if (typeof isDark === 'undefined') {
+        window.isDark = function() {
+            return document.body.getAttribute('data-theme') !== 'light';
+        }
+    }
+
     const hCanvas = document.getElementById('headerBlackHole');
     if (hCanvas) {
         const hCtx = hCanvas.getContext('2d');
@@ -243,9 +230,9 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
             hCtx.translate(55, 55);
             hCtx.rotate(timeHeader * 2.2);
             const g = hCtx.createRadialGradient(0, 0, 8, 0, 0, 44);
-            g.addColorStop(0, '#000');
+            g.addColorStop(0,   '#000');
             g.addColorStop(0.3, 'rgba(225,173,1,0.75)');
-            g.addColorStop(1, 'transparent');
+            g.addColorStop(1,   'transparent');
             hCtx.fillStyle = g;
             hCtx.beginPath();
             hCtx.ellipse(0, 0, 50, 14, 0, 0, Math.PI * 2);
@@ -269,7 +256,7 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
         });
     }
 
-    const hamburger = document.getElementById('hamburger');
+    const hamburger  = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     if (hamburger && mobileMenu) {
         hamburger.addEventListener('click', function () {
@@ -286,12 +273,12 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
     }
 
     document.querySelectorAll('.subscribe-nav-btn, .mobile-menu a[href="#"]').forEach(btn => {
-        if (btn.textContent.includes('सब्सक्रिप्शन')) {
+        if(btn.textContent.includes('सब्सक्रिप्शन')) {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = document.querySelector('.newsletter-section');
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-                if (mobileMenu && mobileMenu.classList.contains('open')) {
+                if(target) target.scrollIntoView({ behavior: 'smooth' });
+                if(mobileMenu && mobileMenu.classList.contains('open')) {
                     mobileMenu.classList.remove('open');
                     hamburger.classList.remove('open');
                 }
@@ -313,6 +300,11 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
             }
         });
     }
+
+    // Load dynamic articles
+    document.addEventListener('DOMContentLoaded', () => {
+        loadCMSCategoryArticles('cms-health-grid', 'स्वास्थ्य');
+    });
 </script>
 </body>
 </html>

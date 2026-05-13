@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
@@ -33,7 +33,7 @@
 
   /* Articles Grid */
   .article-container { max-width: 1320px; margin: 4rem auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
-  .article-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; display: flex; flex-direction: column;}
+  .article-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column;}
   .article-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 30px var(--accent-glow); }
   .card-img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.5s;}
   .article-card:hover .card-img { transform: scale(1.05); }
@@ -42,7 +42,10 @@
   .card-badge { align-self: flex-start; background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;}
   .card-body h3 { margin: 0 0 10px 0; font-size: 1.3rem; line-height: 1.4; color: var(--text); font-family: 'Tiro Devanagari Hindi', serif;}
   .card-body p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; flex: 1;}
-  .read-more { color: var(--accent); font-size: 0.85rem; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;}
+  .read-more-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; cursor: pointer; margin-top: auto; font-family: 'Noto Sans Devanagari', sans-serif; transition: var(--transition-theme); align-self: flex-start;}
+  .read-more-btn:hover { background: var(--accent); color: var(--btn-text); }
+  .full-article-content { display: none; margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.95rem; line-height: 1.8; animation: fadeUp 0.4s ease; text-align: left; }
+  .full-article-content p { margin-bottom: 0.8rem; }
 
   @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 </style>
@@ -254,34 +257,11 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
   </div>
 </div>
 
-<div class="article-container">
-  <a href="#" style="text-decoration: none; color: inherit; display: block;" class="article-card">
-    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600" class="card-img" alt="NISAR Satellite"></div>
-    <div class="card-body">
-      <span class="card-badge">सैटेलाइट मिशन</span>
-      <h3>NISAR उपग्रह: हर 12 दिन में पृथ्वी का नया नक्शा</h3>
-      <p>ISRO और NASA का संयुक्त रडार मिशन जलवायु परिवर्तन, भूस्खलन और कृषि की ट्रैकिंग करने में कैसे मदद करेगा।</p>
-      <a href="#" class="read-more">पूरा पढ़ें →</a>
-    </div>
-  </a>
-  <a href="#" style="text-decoration: none; color: inherit; display: block;" class="article-card">
-    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=600" class="card-img" alt="Himalayan Glaciers"></div>
-    <div class="card-body">
-      <span class="card-badge">जलवायु संकट</span>
-      <h3>हिमालय के ग्लेशियर: 65% तेजी से पिघलने का खतरा</h3>
-      <p>समुद्र का स्तर बढ़ने की चेतावनी और एशिया की प्रमुख नदियों के जल स्तर पर इसका गंभीर प्रभाव।</p>
-      <a href="#" class="read-more">पूरा पढ़ें →</a>
-    </div>
-  </a>
-  <a href="#" style="text-decoration: none; color: inherit; display: block;" class="article-card">
-    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&q=80&w=600" class="card-img" alt="Wildlife AI"></div>
-    <div class="card-body">
-      <span class="card-badge">वन्यजीव</span>
-      <h3>AI से बचाए जा रहे हैं विलुप्त होते जीव</h3>
-      <p>ड्रोन और डीप लर्निंग का उपयोग करके जंगलों में जानवरों की गिनती और शिकारियों पर नजर रखना।</p>
-      <a href="#" class="read-more">पूरा पढ़ें →</a>
-    </div>
-  </a>
+<div class="article-container" id="cms-env-grid">
+  <!-- Dynamic Content from CMS -->
+  <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--muted);">
+    लोड हो रहा है...
+  </div>
 </div>
 
 <!-- ── NEWSLETTER ── -->
@@ -325,6 +305,7 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
     <p class="footer-bottom">© 2026 PrajnaAGI. सर्वाधिकार सुरक्षित।</p>
 </footer>
 
+<script src="cms-loader.js"></script>
 <script>
     if (typeof isDark === 'undefined') {
         window.isDark = function() {
@@ -332,7 +313,6 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
         }
     }
 
-    // Header Black Hole Animation
     const hCanvas = document.getElementById('headerBlackHole');
     if (hCanvas) {
         const hCtx = hCanvas.getContext('2d');
@@ -362,7 +342,6 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
         drawHeaderHole();
     }
 
-    // Theme Toggle
     const themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) {
         themeBtn.addEventListener('click', function () {
@@ -372,7 +351,6 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
         });
     }
 
-    // Hamburger Mobile Menu
     const hamburger  = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     if (hamburger && mobileMenu) {
@@ -381,7 +359,6 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
             hamburger.classList.toggle('open', isOpen);
             this.setAttribute('aria-label', isOpen ? 'मेनू बंद करें' : 'मेनू खोलें');
         });
-
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('open');
@@ -390,16 +367,12 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
         });
     }
 
-    // Header Subscribe Scroll
-    const scrollSubBtns = document.querySelectorAll('.subscribe-nav-btn, .mobile-menu a[href="#"]');
-    scrollSubBtns.forEach(btn => {
+    document.querySelectorAll('.subscribe-nav-btn, .mobile-menu a[href="#"]').forEach(btn => {
         if(btn.textContent.includes('सब्सक्रिप्शन')) {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = document.querySelector('.newsletter-section');
                 if(target) target.scrollIntoView({ behavior: 'smooth' });
-                const mobileMenu = document.getElementById('mobileMenu');
-                const hamburger = document.getElementById('hamburger');
                 if(mobileMenu && mobileMenu.classList.contains('open')) {
                     mobileMenu.classList.remove('open');
                     hamburger.classList.remove('open');
@@ -408,7 +381,6 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
         }
     });
 
-    // Newsletter Validation
     const subBtn = document.querySelector('.subscribe-btn');
     if (subBtn) {
         subBtn.addEventListener('click', function () {
@@ -423,6 +395,11 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
             }
         });
     }
+
+    // Load dynamic articles
+    document.addEventListener('DOMContentLoaded', () => {
+        loadCMSCategoryArticles('cms-env-grid', 'पर्यावरण');
+    });
 </script>
 </body>
 </html>

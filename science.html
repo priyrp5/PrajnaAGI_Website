@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
@@ -142,31 +142,20 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
 
 <div class="netflix-hero">
   <div class="hero-content">
-    <div class="hero-title">AlphaFold 3</div>
-    <div class="hero-desc">AI ने कैंसर और दुर्लभ बीमारियों की दवा खोजने की दिशा में क्रांति ला दी है। लाखों प्रोटीन संरचनाओं को डिकोड किया गया।</div>
+    <div class="hero-title">विज्ञान की दुनिया</div>
+    <div class="hero-desc">ब्रह्मांड के रहस्यों से लेकर सूक्ष्म अणुओं तक, विज्ञान की हर बड़ी खोज अब आपकी भाषा में।</div>
     <div class="hero-btns">
-      <button class="btn-play">▶ लेख पढ़ें</button>
+      <button class="btn-play" onclick="document.querySelector('.row-container').scrollIntoView({behavior:'smooth'})">▶ लेख देखें</button>
       <button class="btn-info">ℹ और जानकारी</button>
     </div>
   </div>
 </div>
 
 <div class="row-container">
-  <h3 class="row-title">Trending Now (विज्ञान)</h3>
-  <div class="card-row">
-    <a href="#" style="text-decoration:none;color:inherit;display:block;" class="sci-card" style="background-image:url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&q=80&w=400');"><div class="card-title">क्वांटम कंप्यूटिंग</div></a>
-    <a href="#" style="text-decoration:none;color:inherit;display:block;" class="sci-card" style="background-image:url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80&w=400');"><div class="card-title">जीन एडिटिंग (CRISPR)</div></a>
-    <a href="#" style="text-decoration:none;color:inherit;display:block;" class="sci-card" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89402bb73e5?auto=format&fit=crop&q=80&w=400');"><div class="card-title">Nuclear Fusion</div></a>
-    <a href="#" style="text-decoration:none;color:inherit;display:block;" class="sci-card" style="background-image:url('https://images.unsplash.com/photo-1554475901-4538ddfbccc2?auto=format&fit=crop&q=80&w=400');"><div class="card-title">डार्क मैटर की खोज</div></a>
-  </div>
-</div>
-
-<div class="row-container" style="margin-top:2rem;">
-  <h3 class="row-title">डीप डाइव (Documentaries)</h3>
-  <div class="card-row">
-    <a href="#" style="text-decoration:none;color:inherit;display:block;" class="sci-card" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400');"><div class="card-title">पृथ्वी की उत्पत्ति</div></a>
-    <a href="#" style="text-decoration:none;color:inherit;display:block;" class="sci-card" style="background-image:url('https://images.unsplash.com/photo-1501862700950-18382cd41497?auto=format&fit=crop&q=80&w=400');"><div class="card-title">ब्लैक होल का रहस्य</div></a>
-    <a href="#" style="text-decoration:none;color:inherit;display:block;" class="sci-card" style="background-image:url('https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&q=80&w=400');"><div class="card-title">मस्तिष्क कैसे काम करता है?</div></a>
+  <h3 class="row-title">ताज़ा खोजें (विज्ञान)</h3>
+  <div class="card-row" id="cms-science-grid">
+    <!-- Dynamic Content from CMS -->
+    <div style="padding: 2rem; color: #999;">लोड हो रहा है...</div>
   </div>
 </div>
 
@@ -211,7 +200,14 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
     <p class="footer-bottom">© 2026 PrajnaAGI. सर्वाधिकार सुरक्षित।</p>
 </footer>
 
+<script src="cms-loader.js"></script>
 <script>
+    if (typeof isDark === 'undefined') {
+        window.isDark = function() {
+            return document.body.getAttribute('data-theme') !== 'light';
+        }
+    }
+
     const hCanvas = document.getElementById('headerBlackHole');
     if (hCanvas) {
         const hCtx = hCanvas.getContext('2d');
@@ -224,9 +220,9 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
             hCtx.translate(55, 55);
             hCtx.rotate(timeHeader * 2.2);
             const g = hCtx.createRadialGradient(0, 0, 8, 0, 0, 44);
-            g.addColorStop(0, '#000');
+            g.addColorStop(0,   '#000');
             g.addColorStop(0.3, 'rgba(225,173,1,0.75)');
-            g.addColorStop(1, 'transparent');
+            g.addColorStop(1,   'transparent');
             hCtx.fillStyle = g;
             hCtx.beginPath();
             hCtx.ellipse(0, 0, 50, 14, 0, 0, Math.PI * 2);
@@ -240,6 +236,7 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
         }
         drawHeaderHole();
     }
+
     const themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) {
         themeBtn.addEventListener('click', function () {
@@ -248,7 +245,8 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
             this.textContent = next === 'light' ? '🌙 रात' : '☀️ दिन';
         });
     }
-    const hamburger = document.getElementById('hamburger');
+
+    const hamburger  = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     if (hamburger && mobileMenu) {
         hamburger.addEventListener('click', function () {
@@ -256,34 +254,12 @@ footer { background:var(--bg-matte); border-top:1px solid var(--border); padding
             hamburger.classList.toggle('open', isOpen);
             this.setAttribute('aria-label', isOpen ? 'मेनू बंद करें' : 'मेनू खोलें');
         });
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); });
-        });
     }
-    document.querySelectorAll('.subscribe-nav-btn, .mobile-menu a[href="#"]').forEach(btn => {
-        if (btn.textContent.includes('सब्सक्रिप्शन')) {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector('.newsletter-section');
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-                if (mobileMenu && mobileMenu.classList.contains('open')) { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); }
-            });
-        }
+
+    // Load dynamic articles
+    document.addEventListener('DOMContentLoaded', () => {
+        loadCMSScience('cms-science-grid');
     });
-    const subBtn = document.querySelector('.subscribe-btn');
-    if (subBtn) {
-        subBtn.addEventListener('click', function () {
-            const inp = document.querySelector('.newsletter-input');
-            if (inp.value && inp.value.includes('@')) {
-                inp.value = '';
-                this.textContent = '✅ धन्यवाद!';
-                setTimeout(() => this.textContent = 'सदस्यता लें', 3000);
-            } else {
-                inp.style.borderColor = '#ff5252';
-                setTimeout(() => inp.style.borderColor = '', 2000);
-            }
-        });
-    }
 </script>
 </body>
 </html>
