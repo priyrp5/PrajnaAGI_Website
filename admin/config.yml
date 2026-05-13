@@ -41,6 +41,7 @@ collections:
             widget: "list"
             fields:
               - { label: "Title (Hindi)", name: "title", widget: "string" }
+              - { label: "Short ID (For Clean Link)", name: "slug", widget: "string", hint: "Example: quantum-success (Use English, no spaces)" }
               - { label: "Category", name: "category", widget: "select", options: ["तकनीक", "विज्ञान", "अंतरिक्ष", "पर्यावरण", "स्वास्थ्य"] }
               - { label: "Tag / Emoji", name: "tag", widget: "string", default: "⭐ Featured" }
               - { label: "Typography (Font)", name: "font_family", widget: "select", options: ["Noto Sans Devnagari", "Tiro Devanagari Hindi", "Inter", "Roboto"], default: "Noto Sans Devnagari" }

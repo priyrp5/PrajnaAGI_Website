@@ -30,6 +30,7 @@
         .article-body iframe { width: 100%; border-radius: 20px; border: 1px solid var(--border); }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 2rem 0; border-radius: 20px; border: 1px solid var(--border); }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .twitter-tweet { margin: 2.5rem auto !important; max-width: 550px !important; }
         .loading-state { text-align: center; padding: 10rem 2rem; font-size: 1.5rem; }
     </style>
     <!-- Marked.js for Markdown Rendering -->
@@ -49,10 +50,10 @@
     <script>
         async function loadFullArticle() {
             const urlParams = new URLSearchParams(window.location.search);
-            const articleTitle = urlParams.get('title');
+            const articleId = urlParams.get('id') || urlParams.get('title');
             const container = document.getElementById('article-container');
 
-            if (!articleTitle) {
+            if (!articleId) {
                 container.innerHTML = '<div class="loading-state">लेख नहीं मिला। <br><a href="Index.html" style="color:var(--accent); font-size:1rem;">वापस जाएं</a></div>';
                 return;
             }
@@ -60,7 +61,9 @@
             try {
                 const response = await fetch('content/articles.json');
                 const data = await response.json();
-                const article = data.articles.find(a => a.title === articleTitle);
+                
+                // Search by slug (Short ID) first, then fallback to title
+                const article = data.articles.find(a => (a.slug === articleId || a.title === articleId));
 
                 if (!article) {
                     container.innerHTML = '<div class="loading-state">क्षमा करें, यह लेख अब उपलब्ध नहीं है।</div>';
