@@ -212,11 +212,24 @@
             <div class="footer-col">
                 <h4>समर्थन करें (Support)</h4>
                 <p style="font-size:0.9rem; margin-bottom:1rem; opacity:0.8;">स्वतंत्र पत्रकारिता और AI शिक्षा को बढ़ावा देने में हमारी मदद करें।</p>
-                <a href="about.html#support" class="subscribe-btn" style="padding:0.6rem 1.5rem; font-size:0.9rem; text-decoration:none; display:inline-block;">सपोर्ट करें</a>
+                <a href="javascript:void(0)" onclick="openPayment()" class="subscribe-btn" style="padding:0.6rem 1.5rem; font-size:0.9rem; text-decoration:none; display:inline-block;">सपोर्ट करें</a>
             </div>
         </div>
         <p class="footer-bottom">© 2026 PrajnaAGI. सर्वाधिकार सुरक्षित।</p>
     </footer>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" onclick="closePayment()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
+        <div class="modal-content" onclick="event.stopPropagation()" style="background: var(--bg-card); border: 1px solid var(--accent); padding: 2.5rem; border-radius: 30px; text-align: center; max-width: 400px; width: 90%;">
+            <h3 style="color:var(--accent);">Scan to Pay (UPI)</h3>
+            <p id="upi-id-display" style="margin-top:0.5rem; font-family:monospace; opacity:0.8;"></p>
+            <img id="qr-display" src="" style="width: 100%; border-radius: 15px; margin: 1.5rem 0; border: 5px solid #fff;" alt="UPI QR Code">
+            <div style="display:flex; gap:1rem; justify-content:center;">
+                <a href="thanks.html" class="tag" style="background:var(--accent); color:#000; text-decoration:none; padding:0.8rem 1.5rem; font-weight:bold;">मैंने भुगतान कर दिया है</a>
+                <button onclick="closePayment()" class="tag" style="cursor:pointer; border:1px solid var(--border); background:none; padding:0.8rem 1.5rem; color:#fff;">बंद करें</button>
+            </div>
+        </div>
+    </div>
 
     <button id="backToTop" class="back-to-top" aria-label="ऊपर जाएं">↑</button>
 
@@ -225,6 +238,21 @@
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/cms-loader.js"></script>
     <script>
+        async function initGlobalPayments() {
+            try {
+                const resp = await fetch('content/settings.json');
+                const settings = await resp.json();
+                if (settings && settings.payments && settings.payments.upi_id) {
+                    const upi = settings.payments.upi_id;
+                    document.getElementById('upi-id-display').innerText = upi;
+                    document.getElementById('qr-display').src = settings.payments.upi_qr || 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi://pay?pa=' + upi;
+                }
+            } catch(e) { console.error(e); }
+        }
+        function openPayment() { document.getElementById('paymentModal').style.display = 'flex'; }
+        function closePayment() { document.getElementById('paymentModal').style.display = 'none'; }
+        initGlobalPayments();
+
         if (window.netlifyIdentity) { window.netlifyIdentity.on("init", user => { if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); } }); setTimeout(() => { const hash = window.location.hash; if (hash && (hash.includes("recovery_token") || hash.includes("invite_token"))) { window.netlifyIdentity.open(); } }, 800); }
     </script>
 </body>
