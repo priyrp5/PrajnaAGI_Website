@@ -40,9 +40,9 @@
         .product-card { display: flex; gap: 1.5rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 1.5rem; border-radius: 25px; margin-bottom: 1.5rem; align-items: center; transition: 0.3s; }
         .product-card:hover { border-color: var(--accent); background: rgba(255,255,255,0.06); transform: translateY(-5px); }
         .product-img { width: 120px; height: 120px; object-fit: cover; border-radius: 15px; }
-        .support-box { background: linear-gradient(135deg, rgba(0,242,254,0.1), rgba(0,0,0,0.5)); border: 1px solid var(--accent); padding: 3rem; border-radius: 30px; text-align: center; margin-top: 5rem; }
-        .support-btn { background: var(--accent); color: #000; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 900; text-decoration: none; display: inline-block; margin-top: 1.5rem; box-shadow: 0 0 30px var(--accent); transition: 0.3s; }
-        .support-btn:hover { transform: scale(1.05); box-shadow: 0 0 50px var(--accent); }
+        .support-box { background: linear-gradient(135deg, var(--accent-glow), rgba(0,0,0,0.2)); border: 1px solid var(--accent); padding: 3rem; border-radius: 30px; text-align: center; margin-top: 5rem; }
+        .support-btn { background: var(--accent); color: #000; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 900; text-decoration: none; display: inline-block; margin-top: 1.5rem; box-shadow: 0 0 30px var(--accent-glow); transition: 0.3s; }
+        .support-btn:hover { transform: scale(1.05); box-shadow: 0 0 50px var(--accent-glow); }
 
         /* Payment Modal */
         #paymentModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
@@ -141,23 +141,23 @@
 
                         <!-- Support Section -->
                         <div class="support-box">
-                            <h2 style="color:#fff; margin-bottom:1rem;">PrajnaAGI का समर्थन करें</h2>
-                            <p style="font-size:1.1rem; opacity:0.8;">अगर आपको यह जानकारी पसंद आई, तो हमें सपोर्ट करें ताकि हम स्वतंत्र पत्रकारिता जारी रख सकें।</p>
+                            <h2 style="color:var(--text-main); margin-bottom:1rem;">PrajnaAGI का समर्थन करें</h2>
+                            <p style="font-size:1.1rem; opacity:0.8; color:var(--text-main);">अगर आपको यह जानकारी पसंद आई, तो हमें सपोर्ट करें ताकि हम स्वतंत्र पत्रकारिता जारी रख सकें।</p>
                             <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-                                <a href="javascript:void(0)" onclick="openPayment()" class="support-btn" style="background:#fff; color:#000; box-shadow:0 0 20px #fff;">UPI / QR से भेजें</a>
-                                <a id="external-pay-link" href="#" target="_blank" class="support-btn" style="display:none;">Card / Netbanking</a>
+                                <a href="javascript:void(0)" onclick="openPayment()" class="support-btn">UPI / QR से भेजें</a>
+                                <a id="external-pay-link" href="#" target="_blank" class="support-btn" style="display:none; background:var(--bg-card); color:var(--text-main); border:1px solid var(--border); box-shadow:none;">Card / Netbanking</a>
                             </div>
                         </div>
 
                         <!-- Payment Modal -->
-                        <div id="paymentModal" onclick="closePayment()">
-                            <div class="modal-content" onclick="event.stopPropagation()">
+                        <div id="paymentModal" onclick="closePayment()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
+                            <div class="modal-content" onclick="event.stopPropagation()" style="background: var(--bg-card); border: 1px solid var(--accent); padding: 2.5rem; border-radius: 30px; text-align: center; max-width: 400px; width: 90%;">
                                 <h3 style="color:var(--accent);">Scan to Pay (UPI)</h3>
-                                <p id="upi-id-display" style="margin-top:0.5rem; font-family:monospace; opacity:0.8;"></p>
-                                <img id="qr-display" src="" class="qr-img" alt="UPI QR Code">
+                                <p id="upi-id-display" style="margin-top:0.5rem; font-family:monospace; opacity:0.8; color:var(--text-main);"></p>
+                                <img id="qr-display" src="" class="qr-img" style="width: 100%; border-radius: 15px; margin: 1.5rem 0; border: 5px solid #fff;" alt="UPI QR Code">
                                 <div style="display:flex; gap:1rem; justify-content:center;">
-                                    <a href="thanks.html" class="tag" style="background:var(--accent); color:#000; text-decoration:none; padding:0.8rem 1.5rem; font-weight:bold;">मैंने भुगतान कर दिया है (I have Paid)</a>
-                                    <button onclick="closePayment()" class="tag" style="cursor:pointer; border:1px solid var(--border); background:none; padding:0.8rem 1.5rem;">बंद करें</button>
+                                    <a href="thanks.html" class="tag" style="background:var(--accent); color:#000; text-decoration:none; padding:0.8rem 1.5rem; font-weight:bold;">मैंने भुगतान कर दिया है</a>
+                                    <button onclick="closePayment()" class="tag" style="cursor:pointer; border:1px solid var(--border); background:none; padding:0.8rem 1.5rem; color:var(--text-main);">बंद करें</button>
                                 </div>
                             </div>
                         </div>

@@ -16,18 +16,18 @@
 }
 
 [data-theme="light"] {
-    --bg: #f7f7f7;
-    --bg-matte: #ececec;
-    --bg-card: rgba(255, 255, 255, 0.92);
+    --bg: #ffffff;
+    --bg-matte: #f4f4f4;
+    --bg-card: rgba(255, 255, 255, 0.95);
     --accent: #b88a00;
     --accent-blue: #007bbd;
-    --accent-glow: rgba(184, 138, 0, 0.25);
-    --text-main: #111111;
-    --text-muted: #444444;
-    --border: rgba(0, 0, 0, 0.18);
-    --nav-bg: rgba(255, 255, 255, 0.94);
-    --shadow: rgba(255, 255, 255, 0.5);
-    --hero-overlay: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 75%);
+    --accent-glow: rgba(184, 138, 0, 0.2);
+    --text-main: #1a1a1a; /* Darker for better Day Mode legibility */
+    --text-muted: #555555; /* Better contrast for captions */
+    --border: rgba(0, 0, 0, 0.1);
+    --nav-bg: rgba(255, 255, 255, 0.96);
+    --shadow: rgba(0, 0, 0, 0.1);
+    --hero-overlay: radial-gradient(circle, rgba(255,255,255,0.7) 0%, transparent 75%);
 }
 
 /* Global Legibility Enhancement */
@@ -262,9 +262,9 @@ nav {
     background: var(--bg-matte);
     border: 1px solid var(--border);
     border-radius: 28px;
-    padding: 4rem 2rem;
+    padding: 3rem 2rem; /* Compact padding */
     text-align: center;
-    margin: 4rem auto;
+    margin: 2.5rem auto; /* Compact margin to match sections */
     max-width: 1100px;
     position: relative;
     z-index: 10;
@@ -309,7 +309,7 @@ nav {
 .newsletter-input::placeholder { color: var(--text-muted); }
 
 .subscribe-btn {
-    background: var(--accent-blue);
+    background: var(--accent); /* Harmonized with brand Gold */
     color: #000;
     border: none;
     padding: 0.9rem 2.5rem;
@@ -333,7 +333,7 @@ nav {
 footer {
     background: var(--bg-matte);
     border-top: 1px solid var(--border);
-    padding: 4rem 2rem 2rem;
+    padding: 2.5rem 2rem 2rem; /* Compact top padding */
     position: relative;
     z-index: 10;
 }
@@ -416,7 +416,7 @@ footer {
 
 /* ── COMMON LAYOUT ── */
 .hero {
-    min-height: 80vh;
+    min-height: 85vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -455,7 +455,7 @@ footer {
 }
 
 .section {
-    padding: 4rem 2rem 0;
+    padding: 2.5rem 2rem 0; /* Brought sections closer to each other */
     max-width: 1300px;
     margin: 0 auto;
     position: relative;
@@ -476,7 +476,7 @@ footer {
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.8rem;
+    gap: 1.5rem; /* Compact grid gap */
 }
 
 .clickable-card {
@@ -535,23 +535,39 @@ footer {
 /* ── FEATURED GRID ── */
 .featured-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 2rem;
-    margin-bottom: 4rem;
-    align-items: start;
+    grid-template-columns: 1.3fr 0.7fr; /* Balanced main and side columns */
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    align-items: stretch;
+}
+
+@media (max-width: 992px) {
+    .featured-grid {
+        grid-template-columns: 1fr; /* Stack on mobile/tablet */
+    }
+    .side-news {
+        grid-template-rows: auto;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
 }
 
 .featured-main {
     padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .featured-img {
-    height: 300px;
+    height: 320px; /* Refined main image height */
     background: #1a1a2e center/cover;
 }
 
 .featured-content {
-    padding: 1.8rem;
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .featured-content .tag {
@@ -576,19 +592,22 @@ footer {
 }
 
 .side-news {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr); /* 3 news perfectly fit side height */
+    gap: 1rem;
 }
 
 .side-news .clickable-card {
-    padding: 1.5rem;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .side-news h4 {
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 0.5rem;
+    font-size: 0.95rem; /* Slightly smaller for tighter grid */
+    line-height: 1.4;
+    margin: 0;
 }
 
 /* ── UTILITIES ── */

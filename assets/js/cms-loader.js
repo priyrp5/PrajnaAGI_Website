@@ -29,19 +29,49 @@ async function loadCMSCategoryArticles(containerId, categoryName) {
         return;
     }
 
-    container.innerHTML = filtered.map(article => `
-        <a href="article.html?id=${encodeURIComponent(article.slug || article.title)}" class="clickable-card">
-            <div style="height:200px; background:url('${article.image || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600'}') center/cover;"></div>
-            <div style="padding:1.5rem;">
-                <span class="tag" style="color:var(--accent); font-weight:800; font-size:0.75rem;">${article.tag || categoryName}</span>
-                <h3 style="margin:10px 0 8px; font-size:1.2rem;">${article.title}</h3>
-                <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.5;">${article.summary}</p>
-                <div class="progress-bar">
-                    <div class="progress-fill" data-percent="100%"></div>
+    if (filtered.length === 0) {
+        container.innerHTML = '<p style="grid-column:1/-1; text-align:center; padding:2rem; opacity:0.6;">इस श्रेणी में अभी कोई लेख नहीं हैं।</p>';
+        return;
+    }
+
+    // First Article is Featured, next 3 are Side News, rest are Grid
+    const featured = filtered[0];
+    const sideNews = filtered.slice(1, 4);
+    const others = filtered.slice(4);
+
+    let html = `
+        <div class="featured-grid" style="margin-bottom:2.5rem;">
+            <a href="article.html?id=${encodeURIComponent(featured.slug || featured.title)}" class="clickable-card featured-main">
+                <div class="featured-img" style="background-image: url('${featured.image || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000'}')"></div>
+                <div class="featured-content">
+                    <span class="tag" style="color:var(--accent); font-weight:800; font-size:0.75rem;">⭐ Featured</span>
+                    <h3 style="margin:10px 0 8px; font-size:1.5rem;">${featured.title}</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem;">${featured.summary}</p>
                 </div>
+            </a>
+            <div class="side-news">
+                ${sideNews.map(sn => `
+                    <a href="article.html?id=${encodeURIComponent(sn.slug || sn.title)}" class="clickable-card">
+                        <h4 style="font-size:0.95rem; margin:0;">${sn.title}</h4>
+                    </a>
+                `).join('')}
             </div>
-        </a>
-    `).join('');
+        </div>
+        <div class="card-grid">
+            ${others.map(article => `
+                <a href="article.html?id=${encodeURIComponent(article.slug || article.title)}" class="clickable-card">
+                    <div style="height:180px; background:url('${article.image || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600'}') center/cover;"></div>
+                    <div style="padding:1.4rem;">
+                        <span class="tag" style="color:var(--accent); font-weight:800; font-size:0.7rem;">${article.category}</span>
+                        <h3 style="margin:8px 0; font-size:1.1rem;">${article.title}</h3>
+                        <p style="color:var(--text-muted); font-size:0.85rem; line-height:1.4;">${article.summary}</p>
+                    </div>
+                </a>
+            `).join('')}
+        </div>
+    `;
+
+    container.innerHTML = html;
 
     // Re-observe new elements
     if (window.revealObserver) {
@@ -57,8 +87,8 @@ async function loadCMSLatestNews(containerId) {
     const data = await fetchJSON('content/articles.json');
     if (!data || !data.articles) return;
 
-    // Last 6 articles
-    const latest = data.articles.slice(0, 6);
+    // Last 4 articles for perfect fit
+    const latest = data.articles.slice(0, 4);
 
     container.innerHTML = latest.map(article => `
         <a href="article.html?id=${encodeURIComponent(article.slug || article.title)}" class="clickable-card">
