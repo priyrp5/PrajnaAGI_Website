@@ -416,16 +416,28 @@ footer {
 
 /* ── COMMON LAYOUT ── */
 .hero {
-    min-height: 85vh;
+    min-height: 50vh; /* Default for category pages */
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    padding: 6rem 2rem 4rem;
+    align-items: center;
     text-align: center;
+    padding: 100px 2rem 4rem;
     position: relative;
-    z-index: 10;
+    overflow: hidden;
     background: var(--hero-overlay);
+}
+
+/* Homepage specific "Perfect Anchor" height */
+.home-page .hero {
+    height: 100vh;
+    padding: 70px 2rem 0;
+}
+
+.ticker-wrap {
+    margin-top: -45px; /* Pull ticker up into the 100vh fold */
+    position: relative;
+    z-index: 20;
 }
 
 .hero h1 {

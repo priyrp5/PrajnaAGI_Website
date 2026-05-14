@@ -112,9 +112,9 @@ async function loadCMSTicker(containerClass) {
     if (tracks.length === 0) return;
 
     const tickerData = await fetchJSON('content/ticker.json');
-    if (!tickerData) return;
+    if (!tickerData || !tickerData.items) return;
 
-    const tickerHTML = tickerData.map(item => `
+    const tickerHTML = tickerData.items.map(item => `
         <span>${item.text}</span><span>•</span>
     `).join('');
 
